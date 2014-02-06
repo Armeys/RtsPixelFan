@@ -3,9 +3,9 @@
   <caption></caption>
   <width>640</width>
   <height>480</height>
-  <vsnap>32</vsnap>
-  <hsnap>32</hsnap>
-  <isometric>0</isometric>
+  <vsnap>64</vsnap>
+  <hsnap>64</hsnap>
+  <isometric>-1</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
   <colour>12632256</colour>
@@ -54,7 +54,12 @@
     <instance objName="obj_iniciar_game" x="0" y="0" name="inst_D1640F8D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_change" x="32" y="0" name="inst_A9584C4A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
-  <tiles/>
+  <tiles>
+    <tile bgName="bgm_grass_world" x="128" y="192" w="64" h="64" xo="192" yo="384" id="10000060" name="inst_9DAEC2CC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bgm_grass_world" x="96" y="160" w="64" h="64" xo="128" yo="384" id="10000061" name="inst_6936B3AC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bgm_grass_world" x="160" y="224" w="64" h="64" xo="64" yo="384" id="10000062" name="inst_785CD3E6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bgm_grass_world" x="192" y="256" w="64" h="64" xo="192" yo="384" id="10000063" name="inst_55C3504B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+  </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>
