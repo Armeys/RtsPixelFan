@@ -3,11 +3,67 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="6" name="datafiles">
+    <datafiles number="6" name="config">
+      <datafile>
+        <name>config.ini</name>
+        <exists>-1</exists>
+        <size>76</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>config.ini</filename>
+      </datafile>
+    </datafiles>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_prueba</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="luces">
+      <script>scripts\SL_ToD_default.gml</script>
+      <script>scripts\SL_engine_ini_begin.gml</script>
+      <script>scripts\SL_engine_ini_end.gml</script>
+      <script>scripts\SL_engine_render.gml</script>
+      <script>scripts\SL_engine_draw.gml</script>
+      <script>scripts\SL_engine_free.gml</script>
+      <script>scripts\SL_light_ini_begin.gml</script>
+      <script>scripts\SL_light_ini_end.gml</script>
+      <script>scripts\SL_light_free.gml</script>
+      <script>scripts\SL_light_cast_obj.gml</script>
+      <script>scripts\SL_global_cast_obj.gml</script>
+      <script>scripts\SL_cast_sprite.gml</script>
+      <script>scripts\SL_add_light.gml</script>
+      <script>scripts\SL_draw_sprite_light.gml</script>
+      <script>scripts\SL_draw_sprite_shadow.gml</script>
+      <script>scripts\SL_sprite_set_ambient.gml</script>
+      <script>scripts\SL_set_time.gml</script>
+    </scripts>
+  </scripts>
+  <objects name="objects">
+    <object>objects\obj_iniciar_game</object>
+    <objects name="luces">
+      <object>objects\obj_engine</object>
+      <object>objects\obj_change</object>
+      <object>objects\obj_prueba_luz</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_change</room>
+    <room>rooms\rm_prueba</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>

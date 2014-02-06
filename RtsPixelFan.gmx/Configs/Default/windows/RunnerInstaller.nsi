@@ -123,12 +123,11 @@ UninstPage instfiles
 Section `${APP_NAME}`
   SectionIn RO  
   ; Set output path to the installation directory.
-  SetOutPath $INSTDIR\dll
+  SetOutPath $INSTDIR
   
   ; Put file there
   File "${LICENSE_NAME}"
-  File /r "${SOURCE_DIR}\*.*"
-  SetOutPath $INSTDIR\game  
+  File /r "${SOURCE_DIR}\*.*"    
   
   ; Write the uninstall keys for Windows
   WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORT_NAME}" "DisplayName" "${APP_NAME}"
