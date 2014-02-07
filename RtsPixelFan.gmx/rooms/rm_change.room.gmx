@@ -55,10 +55,10 @@
     <instance objName="obj_change" x="32" y="0" name="inst_A9584C4A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
-    <tile bgName="bgm_grass_world" x="128" y="192" w="64" h="64" xo="192" yo="384" id="10000060" name="inst_9DAEC2CC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgm_grass_world" x="96" y="160" w="64" h="64" xo="128" yo="384" id="10000061" name="inst_6936B3AC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgm_grass_world" x="160" y="224" w="64" h="64" xo="64" yo="384" id="10000062" name="inst_785CD3E6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgm_grass_world" x="192" y="256" w="64" h="64" xo="192" yo="384" id="10000063" name="inst_55C3504B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="&lt;undefined&gt;" x="128" y="192" w="64" h="64" xo="192" yo="384" id="10000060" name="inst_9DAEC2CC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="&lt;undefined&gt;" x="96" y="160" w="64" h="64" xo="128" yo="384" id="10000061" name="inst_6936B3AC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="&lt;undefined&gt;" x="160" y="224" w="64" h="64" xo="64" yo="384" id="10000062" name="inst_785CD3E6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="&lt;undefined&gt;" x="192" y="256" w="64" h="64" xo="192" yo="384" id="10000063" name="inst_55C3504B" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
