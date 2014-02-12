@@ -31,6 +31,7 @@ damage = 10;
 movimiento = 100;
 armadura = 10;
 alcance = 100;
+selected = false;
 </string>
           </argument>
         </arguments>

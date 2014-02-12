@@ -32,6 +32,12 @@ global.resolucion = ini_read_real("CONFIGURACION","resolucion",2);
 global.sombrasSol = ini_read_string("CONFIGURACION","sombrasSol","false");
 global.sombrasAmbiente = ini_read_string("CONFIGURACION","sombrasAmbiente","false");
 ini_close();
+
+///////variables/////////
+global.destx = 0;
+global.desty = 0;
+global.startx = 0;
+global.starty = 0;
 </string>
           </argument>
         </arguments>
