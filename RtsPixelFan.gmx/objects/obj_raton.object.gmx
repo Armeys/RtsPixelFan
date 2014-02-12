@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>pintar = false;
+            <string>global.tamanoUnidad=32;
+pintar = false;
 </string>
           </argument>
         </arguments>
@@ -100,17 +101,55 @@ global.starty = mouse_y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(position_empty(mouse_x,mouse_y))
-{    
-    global.destx = mouse_x;
-    global.desty = mouse_y;
-    with (obj_char_prueba)
+            <string>global.cantidad = 0;
+if(position_empty(mouse_x,mouse_y)) // si esta vacio
+{
+    with(obj_char_prueba)  ///contamos la cantidad de unidades que se van a mover
     {
         if(selected)
         {
-            movin = true;
+            global.cantidad++
         }
     }
+    if(global.cantidad &lt;=3)  //creamos fila de 3
+    {  
+        global.xx = mouse_x - (global.tamanoUnidad + (global.tamanoUnidad/2) +2);
+        global.yy = mouse_y;
+        with(obj_char_prueba)
+        {
+            if(selected)
+            {
+                movin = true;
+                destx = global.xx;
+                desty = global.yy;
+                global.xx = global.xx + global.tamanoUnidad + 1;
+            }
+        }
+    }
+    if(global.cantidad &gt;3 &amp;&amp; global.cantidad &lt;=6) //creamos 2 filas de 3
+    {
+        global.xxStart = mouse_x - (global.tamanoUnidad + (global.tamanoUnidad/2) +2);
+        global.xx = global.xxStart;
+        global.yy = mouse_y - (global.tamanoUnidad/2) + 1;
+        global.cantidad = 0;
+        with(obj_char_prueba)
+        {
+            if(global.cantidad ==3)
+            {
+                global.yy = global.yy + global.tamanoUnidad + 1;
+                global.xx = global.xxStart;
+            }
+            if(selected)
+            {
+                movin = true;
+                destx = global.xx;
+                desty = global.yy;
+                global.xx = global.xx + global.tamanoUnidad + 1;
+                global.cantidad++;
+            }            
+        }
+    }
+    
 }
 </string>
           </argument>
@@ -138,6 +177,10 @@ global.starty = mouse_y;
 {
     draw_set_color(c_green);
     draw_rectangle(global.startx,global.starty,mouse_x,mouse_y,true);
+    draw_set_alpha(0.3);
+    draw_set_color(c_blue);
+    draw_rectangle(global.startx,global.starty,mouse_x,mouse_y,false);
+    draw_set_alpha(1);
 }
 </string>
           </argument>
