@@ -33,6 +33,11 @@
       <sprite>sprites\spr_bloqueo</sprite>
       <sprite>sprites\spr_stop</sprite>
     </sprites>
+    <sprites name="prueba_minions">
+      <sprite>sprites\spr_minions</sprite>
+      <sprite>sprites\spr_recursos</sprite>
+      <sprite>sprites\spr_casa</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bgm_title</background>
@@ -59,6 +64,9 @@
       <script>scripts\SL_set_time.gml</script>
     </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_prueba</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_iniciar_game</object>
     <objects name="luces">
@@ -78,6 +86,12 @@
     </objects>
     <objects name="mouse">
       <object>objects\obj_raton</object>
+    </objects>
+    <objects name="prueba recursos">
+      <object>objects\obj_casa</object>
+      <object>objects\obj_minions</object>
+      <object>objects\obj_recursos</object>
+      <object>objects\obj_texto</object>
     </objects>
   </objects>
   <rooms name="rooms">
