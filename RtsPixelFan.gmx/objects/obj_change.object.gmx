@@ -41,6 +41,10 @@ switch (global.resolucion)
     break;
     
     case 4:
+        window_set_size(1280,1024);         
+    break;
+    
+    case 5:
         window_set_size(1920,1080);
     break;
 }

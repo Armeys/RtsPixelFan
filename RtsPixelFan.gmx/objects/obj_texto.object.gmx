@@ -26,9 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>draw_set_font(fnt_prueba);
-draw_text(0, 0, obj_minions.carga);
-draw_text(30, 0, obj_recursos.material);
-draw_text(90, 0, obj_casa.material);
+draw_text(0, 600, obj_minions.carga);
+draw_text(30, 600, obj_recursos.material);
+draw_text(90, 600, obj_casa.material);
+draw_text(120, 600, string(fps) + " " + string(fps_real));
 </string>
           </argument>
         </arguments>

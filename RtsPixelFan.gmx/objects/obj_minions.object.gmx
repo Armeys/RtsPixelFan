@@ -28,6 +28,7 @@
             <string>vel = 3;
 carga = 0;
 maxcarga = 10;
+limpiaFog = true;
 
 </string>
           </argument>
@@ -105,7 +106,7 @@ alarm[0] = 60;
             <kind>1</kind>
             <string>if(carga == 0 &amp;&amp; distance_to_object(obj_recursos) &gt; 0)
 {
-mp_potential_step(obj_recursos.x,obj_recursos.y,2,false);
+    mp_potential_step(obj_recursos.x,obj_recursos.y,2,false);
 }
 
 if(distance_to_object(obj_recursos) == 0 &amp;&amp; obj_recursos.material &gt;0)

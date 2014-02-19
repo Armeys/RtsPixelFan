@@ -28,6 +28,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_prueba</sprite>
+    <sprite>sprites\spr_prueba_niebla</sprite>
     <sprites name="character prueba">
       <sprite>sprites\spr_char_prueba</sprite>
       <sprite>sprites\spr_bloqueo</sprite>
@@ -73,6 +74,7 @@
       <object>objects\obj_engine</object>
       <object>objects\obj_change</object>
       <object>objects\obj_prueba_luz</object>
+      <object>objects\obj_niebla</object>
     </objects>
     <objects name="objetos parent">
       <object>objects\obj_infanteria</object>

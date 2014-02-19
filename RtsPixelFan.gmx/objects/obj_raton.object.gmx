@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.tamanoUnidad=32;
+            <string>global.tamanoUnidadX=26;
+global.tamanoUnidadY=46;
 pintar = false;
 </string>
           </argument>
@@ -104,6 +105,7 @@ global.starty = mouse_y;
             <string>global.cantidad = 0;
 if(position_empty(mouse_x,mouse_y)) // si esta vacio
 {
+    with(obj_stop) instance_destroy();
     with(obj_char_prueba)  ///contamos la cantidad de unidades que se van a mover
     {
         if(selected)
@@ -111,45 +113,80 @@ if(position_empty(mouse_x,mouse_y)) // si esta vacio
             global.cantidad++
         }
     }
-    if(global.cantidad &lt;=3)  //creamos fila de 3
-    {  
-        global.xx = mouse_x - (global.tamanoUnidad + (global.tamanoUnidad/2) +2);
-        global.yy = mouse_y;
-        with(obj_char_prueba)
-        {
-            if(selected)
-            {
-                movin = true;
-                destx = global.xx;
-                desty = global.yy;
-                global.xx = global.xx + global.tamanoUnidad + 1;
-            }
-        }
-    }
-    if(global.cantidad &gt;3 &amp;&amp; global.cantidad &lt;=6) //creamos 2 filas de 3
-    {
-        global.xxStart = mouse_x - (global.tamanoUnidad + (global.tamanoUnidad/2) +2);
-        global.xx = global.xxStart;
-        global.yy = mouse_y - (global.tamanoUnidad/2) + 1;
-        global.cantidad = 0;
-        with(obj_char_prueba)
-        {
-            if(global.cantidad ==3)
-            {
-                global.yy = global.yy + global.tamanoUnidad + 1;
-                global.xx = global.xxStart;
-            }
-            if(selected)
-            {
-                movin = true;
-                destx = global.xx;
-                desty = global.yy;
-                global.xx = global.xx + global.tamanoUnidad + 1;
-                global.cantidad++;
-            }            
-        }
-    }
+    /// calculo del numero de filas
+    global.filas = round(sqrt(global.cantidad));
     
+    /// calculo del numero de columnas de la unidad 3x3 -- 4x4 -- 5x5 --    
+    if (global.cantidad &gt;0 &amp;&amp; global.cantidad &lt;=9)    
+        global.columnas = 3;
+    else if(global.cantidad &gt;9 &amp;&amp; global.cantidad &lt;=16)
+        global.columnas = 4;        
+    else if(global.cantidad &gt;16 &amp;&amp; global.cantidad &lt;=25)
+        global.columnas = 5;
+    else if(global.cantidad &gt;25 &amp;&amp; global.cantidad &lt;=36)
+        global.columnas = 6;
+    else if(global.cantidad &gt;36 &amp;&amp; global.cantidad &lt;=49)
+        global.columnas = 7;
+    else if(global.cantidad &gt;49 &amp;&amp; global.cantidad &lt;=64)
+        global.columnas = 8;
+    else if(global.cantidad &gt;64 &amp;&amp; global.cantidad &lt;=81)
+        global.columnas = 9;
+    else if(global.cantidad &gt;81 &amp;&amp; global.cantidad &lt;=100)
+        global.columnas = 10;    
+    //comenzamos dibujando la formacion
+    if(global.cantidad &gt;0)  
+    {   
+        if(global.cantidad &gt; 3) // formacion para mas de 3 unidades.
+        {
+            // calculamos x de la unidad de la esquina superior izq en relacion con el raton.       
+            if(global.columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.
+                global.xxStart = mouse_x - ((global.tamanoUnidadX)*(floor(global.columnas/2)-0.5));
+            else
+                global.xxStart = mouse_x - ((global.tamanoUnidadX)*(floor(global.columnas/2)));
+            global.xx = global.xxStart;    //posicion de la primera columna
+            // calculamos y de la unidad de la esquina superior izq en relacion con el raton.
+            if(global.filas % 2 == 0)
+                global.yy = mouse_y - (global.tamanoUnidadY * (floor(global.filas/2)-0.5));
+            else
+                global.yy = mouse_y - (global.tamanoUnidadY * (floor(global.filas/2)));
+        }
+        else  // formacion para 3 o menso unidades.
+        {
+            switch(global.cantidad)
+            {
+                case 1:
+                    global.xx = mouse_x;
+                break;
+                case 2:
+                    global.xx = mouse_x - (global.tamanoUnidadX/2);
+                break;
+                case 3:
+                    global.xx = mouse_x - global.tamanoUnidadX;
+                break;
+            } 
+            global.yy = mouse_y;     
+        }
+                        
+        global.contador = 0;
+        with(obj_char_prueba)
+        {            
+            if(global.contador == global.columnas &amp;&amp; global.cantidad &gt;3)  // cuando coinciden saltamos a la siguiente fila
+            {                
+                global.yy = global.yy + global.tamanoUnidadY ;
+                global.xx = global.xxStart;
+                global.contador = 0;
+            }            
+            if(selected) //añadimos el movimiento a la unidad.
+            {
+                movin = true;
+                destx = global.xx;
+                desty = global.yy;                
+                instance_create(global.xx,global.yy,obj_stop);
+                global.xx = global.xx + global.tamanoUnidadX;
+                global.contador++;
+            }
+        }
+    }
 }
 </string>
           </argument>
