@@ -103,8 +103,8 @@ global.starty = mouse_y;
           <argument>
             <kind>1</kind>
             <string>global.cantidad = 0;
-if(position_empty(mouse_x,mouse_y)) // si esta vacio
-{
+//if(position_empty(mouse_x,mouse_y)) // si esta vacio
+//{
     with(obj_stop) instance_destroy();
     with(obj_char_prueba)  ///contamos la cantidad de unidades que se van a mover
     {
@@ -132,7 +132,9 @@ if(position_empty(mouse_x,mouse_y)) // si esta vacio
     else if(global.cantidad &gt;64 &amp;&amp; global.cantidad &lt;=81)
         global.columnas = 9;
     else if(global.cantidad &gt;81 &amp;&amp; global.cantidad &lt;=100)
-        global.columnas = 10;    
+        global.columnas = 10;
+    else if(global.cantidad &gt;100 &amp;&amp; global.cantidad &lt;=121)
+        global.columnas = 11;    
     //comenzamos dibujando la formacion
     if(global.cantidad &gt;0)  
     {   
@@ -187,7 +189,7 @@ if(position_empty(mouse_x,mouse_y)) // si esta vacio
             }
         }
     }
-}
+//}
 </string>
           </argument>
         </arguments>
@@ -210,7 +212,9 @@ if(position_empty(mouse_x,mouse_y)) // si esta vacio
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(pintar)
+            <string>draw_set_color(c_white);
+draw_text(mouse_x,mouse_y,string(mouse_x)+ " " + string(mouse_y) + " " + string(view_hview[0]));
+if(pintar)
 {
     draw_set_color(c_green);
     draw_rectangle(global.startx,global.starty,mouse_x,mouse_y,true);

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>-2</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,10 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surfaceScale = 1/2;
-surf = surface_create(room_width * surfaceScale,room_height * surfaceScale);
-create = true;
-update = true;
+            <string>surfaceScale = 1/global.surfaceScale;
+nieblaNegra = surface_create(room_width * surfaceScale,room_height * surfaceScale);
+nieblaGris = surface_create(room_width * surfaceScale,room_height * surfaceScale);
+createNegro = true;
+createGris = true;
+updateNegro = true;
+updateGris = true;
 alarm[0] = 10;
 </string>
           </argument>
@@ -52,7 +55,8 @@ alarm[0] = 10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>update = 1;
+            <string>updateNegro = true;
+updateGris = true;
 alarm[0] = 10;
 </string>
           </argument>
@@ -76,26 +80,48 @@ alarm[0] = 10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (update == true)
+            <string>if (updateNegro == true) //niebla negra.
 {
-    update = false;
-    surface_set_target(surf);
-    if(create == true)
+    updateNegro = false;
+    surface_set_target(nieblaNegra);
+    if(createNegro == true) //creamos la niebla la primera vez de color negro
     {
         draw_clear(c_black);
-        create = 0;
+        createNegro = false;
     }
     
-    with(obj_char_prueba)
+    with(obj_char_prueba)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
     {
         draw_set_blend_mode(bm_src_color);
-        draw_sprite_ext(spr_prueba_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale,other.surfaceScale,0,c_white,1);
+        draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale,other.surfaceScale,0,c_white,1);
         draw_set_blend_mode(bm_normal);
             
     }
     surface_reset_target();
 }
-draw_surface_ext(surf,0,0,1/surfaceScale,1/surfaceScale,0,c_white,1);    
+
+if (global.nieblaCompleja)
+{
+    if (updateGris == true) //niebla gris
+    {
+        updateGris = false;
+        surface_set_target(nieblaGris);
+        // como la esta solo es visible si hay objetos cerca se crea continuamente
+        draw_clear(c_black);
+        
+        with(obj_char_prueba) // para cada objeto limpiamos la zona de gris. usando de plantilla un sprite
+        {
+            draw_set_blend_mode(bm_src_color);
+            draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale*3/4,other.surfaceScale*3/4,0,c_white,1);
+            draw_set_blend_mode(bm_normal);
+                
+        }
+        surface_reset_target();
+    }
+    draw_surface_ext(nieblaGris,0,0,1/surfaceScale,1/surfaceScale,0,c_white,0.4);
+}
+
+draw_surface_ext(nieblaNegra,0,0,1/surfaceScale,1/surfaceScale,0,c_white,1);   
 </string>
           </argument>
         </arguments>

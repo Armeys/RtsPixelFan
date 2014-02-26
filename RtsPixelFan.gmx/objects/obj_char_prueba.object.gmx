@@ -56,7 +56,9 @@ destid = 0;
             <kind>1</kind>
             <string>if(movin == true)
 {       
-    mp_potential_step(destx,desty,3,false);
+    mp_potential_step(destx,desty,2,false);
+    if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
+        movin = false;
 }
 </string>
           </argument>
@@ -175,7 +177,7 @@ selected = true;
             <string>draw_sprite(sprite_index,0,x,y);
 if(selected)
 {
-    draw_set_color(c_green);
+    draw_set_color(c_dkgray);
     draw_circle(x,y,18,true);
 }
 </string>

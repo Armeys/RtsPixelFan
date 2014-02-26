@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1000</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -66,7 +66,7 @@ SL_global_cast_obj(0,obj_prueba_luz,-1,1,1);
 //SL_add_light(obj_light_torch);
  
 SL_ToD_default(); // Initialisation du ToD 
-SL_set_time(14); // Initialisation de l'heure 
+SL_set_time(6); // Initialisation de l'heure 
  
 SL_engine_ini_end(); // Termine l'initialisation du système
 </string>

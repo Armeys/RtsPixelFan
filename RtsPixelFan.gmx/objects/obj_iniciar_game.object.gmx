@@ -31,6 +31,8 @@ global.full = ini_read_real("CONFIGURACION","full",1);
 global.resolucion = ini_read_real("CONFIGURACION","resolucion",2);
 global.sombrasSol = ini_read_string("CONFIGURACION","sombrasSol","false");
 global.sombrasAmbiente = ini_read_string("CONFIGURACION","sombrasAmbiente","false");
+global.surfaceScale = ini_read_real("CONFIGURACION","nieblaSurfaceScale",4);
+global.nieblaCompleja = ini_read_string("CONFIGURACION","nieblaCompleja","false");
 ini_close();
 
 ///////variables/////////
