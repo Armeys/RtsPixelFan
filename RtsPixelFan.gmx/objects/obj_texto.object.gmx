@@ -28,7 +28,7 @@
             <string>draw_set_font(fnt_prueba);
 draw_set_color(c_white);
 draw_text(10, 10, "carga " + string(obj_minions.carga));
-draw_text(80, 10, "material en mina" + string(obj_recursos.material));
+draw_text(80, 10, "material en mina " + string(obj_recursos.material));
 draw_text(250, 10, "material guardado " + string(obj_casa.material));
 draw_text(420, 10, "fps " + string(fps) + " " + "fps real " + string(fps_real));
 draw_text(10,30,string('Presiona "P" para formar patrullas.'));

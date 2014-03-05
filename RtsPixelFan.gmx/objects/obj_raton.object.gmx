@@ -96,7 +96,7 @@ banderadestino = 0;
     //comenzamos dibujando la formacion
     if(global.cantidad &gt;0)  
     {   
-        if(global.cantidad &gt; 3) // formacion para mas de 3 unidades.
+        if(global.cantidad &gt; 3) // formacion para mas de 3 unidades. en cuadrado
         {
             // calculamos x de la unidad de la esquina superior izq en relacion con el raton.       
             if(global.columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.

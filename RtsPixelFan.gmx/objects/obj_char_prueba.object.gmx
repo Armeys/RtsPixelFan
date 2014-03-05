@@ -40,7 +40,6 @@ volver = false;
 banderaorig = 0;
 banderadest = 0;
 crearbandera = true;
-angulo = 0;
 </string>
           </argument>
         </arguments>
@@ -72,8 +71,7 @@ if(patrullar)
     }
     if(volver)
     {
-        mp_potential_step(origx,origy,velMovi,false);
-        angulo = point_direction(x,y,origx,origy);
+        mp_potential_step(origx,origy,velMovi,false);        
         if(origx == x &amp;&amp; origy == y)
         {
             volver = false;
@@ -81,8 +79,7 @@ if(patrullar)
     }
     if(movin == true)
     {    
-        mp_potential_step(destx,desty,velMovi,false);
-        angulo = point_direction(x,y,destx,desty);
+        mp_potential_step(destx,desty,velMovi,false);        
         if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
         {
             movin = false;
@@ -101,8 +98,7 @@ else
     ///////movimiento simple/////////
     if(movin == true)
     {       
-        mp_potential_step(destx,desty,velMovi,false);
-        angulo = point_direction(x,y,destx,desty);
+        mp_potential_step(destx,desty,velMovi,false);        
         if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
         {
             movin = false;
@@ -111,7 +107,6 @@ else
         }        
     }
 }
-image_angle = angulo;
 </string>
           </argument>
         </arguments>
@@ -226,8 +221,7 @@ selected = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_sprite(sprite_index,0,x,y);
-draw_sprite_ext(sprite_index,0,x,y,1,1,angulo,c_white,1);
+            <string>draw_sprite(sprite_index,0,x,y);
 if(selected)
 {
     draw_set_color(c_dkgray);
