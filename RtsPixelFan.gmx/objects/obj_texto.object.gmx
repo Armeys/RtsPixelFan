@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-3</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,11 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>draw_set_font(fnt_prueba);
-draw_set_color(c_black);
-draw_text(0, 600, obj_minions.carga);
-draw_text(30, 600, obj_recursos.material);
-draw_text(90, 600, obj_casa.material);
-draw_text(120, 600, string(fps) + " " + string(fps_real));
+draw_set_color(c_white);
+draw_text(10, 10, "carga " + string(obj_minions.carga));
+draw_text(80, 10, "material en mina" + string(obj_recursos.material));
+draw_text(250, 10, "material guardado " + string(obj_casa.material));
+draw_text(420, 10, "fps " + string(fps) + " " + "fps real " + string(fps_real));
+draw_text(10,30,string('Presiona "P" para formar patrullas.'));
 </string>
           </argument>
         </arguments>
