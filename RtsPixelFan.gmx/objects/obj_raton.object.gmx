@@ -28,64 +28,18 @@
             <string>global.tamanoUnidadX=26;
 global.tamanoUnidadY=46;
 pintar = false;
+minx = 9999;
+maxx = 0;
+miny = 9999;
+maxy = 0;
+banderasalida = 0;
+banderadestino = 0;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>pintar = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(position_empty(mouse_x,mouse_y))
-{
-    with(obj_char_prueba)selected = false;
-}
-pintar = true;
-global.startx = mouse_x;
-global.starty = mouse_y;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="51">
+    <event eventtype="6" enumb="57">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -106,11 +60,15 @@ global.starty = mouse_y;
 //if(position_empty(mouse_x,mouse_y)) // si esta vacio
 //{
     with(obj_stop) instance_destroy();
-    with(obj_char_prueba)  ///contamos la cantidad de unidades que se van a mover
-    {
+    with(obj_char_prueba)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
+    {        
         if(selected)
         {
-            global.cantidad++
+            global.cantidad++;
+            other.minx = min(other.minx,x);
+            other.miny = min(other.miny,y);
+            other.maxx = max(other.maxx,x);
+            other.maxy = max(other.maxy,y);                                             
         }
     }
     /// calculo del numero de filas
@@ -167,29 +125,123 @@ global.starty = mouse_y;
                 break;
             } 
             global.yy = mouse_y;     
+        }        
+                       
+        global.contador = 0; 
+        if(global.patrullar) // calculamos donde vamos a colocar las banderas. la de inicio en el centro de la pisicion inicial de las unidades
+        {                    // la de destino en la posicion del raton. les asignamos la cantidad de unidades q van a hacer esa patrulla.
+            banderax = minx + ((maxx - minx)/2);
+            banderay = miny + ((maxy - miny)/2);        
+            banderasalida = instance_create(banderax,banderay,obj_bandera_patrulla);
+            banderasalida.cantidad = global.cantidad;           
+            banderadestino = instance_create(mouse_x,mouse_y,obj_bandera_patrulla);
+            banderadestino.image_index = 1;
+            banderadestino.cantidad = global.cantidad;            
         }
-                        
-        global.contador = 0;
+        
         with(obj_char_prueba)
-        {            
+        {     
             if(global.contador == global.columnas &amp;&amp; global.cantidad &gt;3)  // cuando coinciden saltamos a la siguiente fila
             {                
                 global.yy = global.yy + global.tamanoUnidadY ;
                 global.xx = global.xxStart;
                 global.contador = 0;
             }            
-            if(selected) //añadimos el movimiento a la unidad.
-            {
+            if(selected)//añadimos el movimiento a la unidad.
+            {                
+                if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
+                {
+                    with(obj_bandera_patrulla)
+                    {
+                        if(id == other.banderadest)
+                        {
+                            cantidad--;                            
+                            other.banderadest = 0;
+                        }
+                        if(id == other.banderaorig)
+                        {
+                            cantidad--;                            
+                            other.banderaorig = 0;
+                        }
+                    }
+                }
+                
+                patrullar = false;
                 movin = true;
+                origx = x;
+                origy = y;
                 destx = global.xx;
                 desty = global.yy;                
+                banderadest = other.banderadestino;
+                banderaorig = other.banderasalida;                              
                 instance_create(global.xx,global.yy,obj_stop);
                 global.xx = global.xx + global.tamanoUnidadX;
-                global.contador++;
-            }
+                global.contador++; 
+                if(global.patrullar)
+                {
+                    patrullar = true;                     
+                } 
+            }            
         }
-    }
+        global.patrullar = false;
+        minx = 9999;
+        maxx = 0;
+        miny = 9999;
+        maxy = 0;         
+    }    
 //}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>pintar = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(position_empty(mouse_x,mouse_y))
+{
+    with(obj_char_prueba)selected = false;
+}
+pintar = true;
+global.startx = mouse_x;
+global.starty = mouse_y;
 </string>
           </argument>
         </arguments>

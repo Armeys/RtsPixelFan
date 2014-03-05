@@ -25,13 +25,22 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>limpiaFog = true;
+            <string>velMovi = 2;
 image_speed = 0;
 selected = false;
 movin = false;
 destx = 0;
 desty = 0;
 destid = 0;
+stop = false;
+patrullar = false;
+origx = 0;
+origy = 0;
+volver = false;
+banderaorig = 0;
+banderadest = 0;
+crearbandera = true;
+angulo = 0;
 </string>
           </argument>
         </arguments>
@@ -54,12 +63,55 @@ destid = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(movin == true)
-{       
-    mp_potential_step(destx,desty,2,false);
-    if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
-        movin = false;
+            <string>///////////patrullar//////
+if(patrullar)
+{    
+    if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
+    {        
+        movin = true;        
+    }
+    if(volver)
+    {
+        mp_potential_step(origx,origy,velMovi,false);
+        angulo = point_direction(x,y,origx,origy);
+        if(origx == x &amp;&amp; origy == y)
+        {
+            volver = false;
+        }
+    }
+    if(movin == true)
+    {    
+        mp_potential_step(destx,desty,velMovi,false);
+        angulo = point_direction(x,y,destx,desty);
+        if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
+        {
+            movin = false;
+            volver = true;        
+        }
+        if(destx == x &amp;&amp; desty == y)
+        {
+            movin = false;
+            if(patrullar)
+                volver = true;
+        }
+    }    
 }
+else
+{
+    ///////movimiento simple/////////
+    if(movin == true)
+    {       
+        mp_potential_step(destx,desty,velMovi,false);
+        angulo = point_direction(x,y,destx,desty);
+        if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
+        {
+            movin = false;
+            destx = 0;
+            desty = 0;
+        }        
+    }
+}
+image_angle = angulo;
 </string>
           </argument>
         </arguments>
@@ -174,7 +226,8 @@ selected = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index,0,x,y);
+            <string>//draw_sprite(sprite_index,0,x,y);
+draw_sprite_ext(sprite_index,0,x,y,1,1,angulo,c_white,1);
 if(selected)
 {
     draw_set_color(c_dkgray);

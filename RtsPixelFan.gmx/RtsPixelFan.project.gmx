@@ -32,6 +32,7 @@
       <sprite>sprites\spr_char_prueba</sprite>
       <sprite>sprites\spr_bloqueo</sprite>
       <sprite>sprites\spr_stop</sprite>
+      <sprite>sprites\spr_bandera_patrulla</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -89,10 +90,12 @@
       <object>objects\obj_char_prueba</object>
       <object>objects\obj_noentra</object>
       <object>objects\obj_stop</object>
+      <object>objects\obj_bandera_patrulla</object>
     </objects>
-    <objects name="mouse">
+    <objects name="teclado y raton">
       <object>objects\obj_raton</object>
       <object>objects\obj_control_camara</object>
+      <object>objects\obj_teclado</object>
     </objects>
     <objects name="prueba recursos">
       <object>objects\obj_casa</object>

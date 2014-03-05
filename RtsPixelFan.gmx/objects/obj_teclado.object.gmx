@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,22 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//////////config.ini/////////
-ini_open("config/config.ini");
-global.full = ini_read_real("CONFIGURACION","full",1);
-global.resolucion = ini_read_real("CONFIGURACION","resolucion",2);
-global.sombrasSol = ini_read_string("CONFIGURACION","sombrasSol","false");
-global.sombrasAmbiente = ini_read_string("CONFIGURACION","sombrasAmbiente","false");
-global.surfaceScale = ini_read_real("CONFIGURACION","nieblaSurfaceScale",4);
-global.nieblaCompleja = ini_read_string("CONFIGURACION","nieblaCompleja","false");
-ini_close();
-
-///////variables/////////
-global.destx = 0;
-global.desty = 0;
-global.startx = 0;
-global.starty = 0;
-global.patrullar = false;
+            <string>if(keyboard_check_pressed(ord("P")))
+    global.patrullar = ! global.patrullar;
 </string>
           </argument>
         </arguments>
