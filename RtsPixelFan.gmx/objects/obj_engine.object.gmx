@@ -35,7 +35,7 @@ sl_maxexposure    = 0.45;
 
 sl_sunshadows_active = global.sombrasSol; // Active le rendu des ombres solaires 
 sl_sunshadows_texturesize = 0.8;  // tamaño de la sombra (Entre 0 et 1)
-sl_sunshadows_quality     = 1; // calidad de la sombra (Entre 0 et 1)
+sl_sunshadows_quality     = 0.4; // calidad de la sombra (Entre 0 et 1)
 sl_sunshadows_alpha       = 0.4; // transparencia (Entre 0 et 1)
 sl_sunshadows_alphalimit  = 0.6; // Taux de luminosité ambiante minimum pour lequel les ombres solaires sont visibles
 sl_sunshadows_margin      = 200;  // Taille de la marge entourant la surface d'ombre, en pixels
