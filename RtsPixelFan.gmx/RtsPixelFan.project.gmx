@@ -33,6 +33,7 @@
       <sprite>sprites\spr_bloqueo</sprite>
       <sprite>sprites\spr_stop</sprite>
       <sprite>sprites\spr_bandera_patrulla</sprite>
+      <sprite>sprites\spr_char_arquero</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -68,6 +69,9 @@
       <script>scripts\SL_sprite_set_ambient.gml</script>
       <script>scripts\SL_set_time.gml</script>
     </scripts>
+    <scripts name="formacion">
+      <script>scripts\scr_formacion_cuadrado.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_prueba</font>
@@ -88,6 +92,7 @@
     </objects>
     <objects name="prueba a*">
       <object>objects\obj_char_prueba</object>
+      <object>objects\obj_char_prueba_2</object>
       <object>objects\obj_noentra</object>
       <object>objects\obj_stop</object>
       <object>objects\obj_bandera_patrulla</object>

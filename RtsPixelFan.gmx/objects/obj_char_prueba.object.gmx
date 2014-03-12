@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_infanteria</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>velMovi = 2;
+            <string>ancho=26;
+alto=46;
+type = "Soldado";
+velMovi = 2;
 image_speed = 0;
 selected = false;
 movin = false;
@@ -193,7 +196,7 @@ else
           <argument>
             <kind>1</kind>
             <string>/////desseleccionamos los otros
-with (obj_char_prueba) 
+with (obj_infanteria) 
 {
     selected = false;    
 }

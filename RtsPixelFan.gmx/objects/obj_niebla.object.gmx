@@ -90,7 +90,7 @@ alarm[0] = 10;
         createNegro = false;
     }
     
-    with(obj_char_prueba)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
+    with(obj_infanteria)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
     {
         draw_set_blend_mode(bm_src_color);
         draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale,other.surfaceScale,0,c_white,1);
@@ -109,7 +109,7 @@ if (global.nieblaCompleja)
         // como la esta solo es visible si hay objetos cerca se crea continuamente
         draw_clear(c_black);
         
-        with(obj_char_prueba) // para cada objeto limpiamos la zona de gris. usando de plantilla un sprite
+        with(obj_infanteria) // para cada objeto limpiamos la zona de gris. usando de plantilla un sprite
         {
             draw_set_blend_mode(bm_src_color);
             draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale*3/4,other.surfaceScale*3/4,0,c_white,1);
@@ -118,7 +118,7 @@ if (global.nieblaCompleja)
         }
         surface_reset_target();
     }
-    draw_surface_ext(nieblaGris,0,0,1/surfaceScale,1/surfaceScale,0,c_white,0.4);
+    draw_surface_ext(nieblaGris,0,0,1/surfaceScale,1/surfaceScale,0,c_white,0.6);
 }
 
 draw_surface_ext(nieblaNegra,0,0,1/surfaceScale,1/surfaceScale,0,c_white,1);   

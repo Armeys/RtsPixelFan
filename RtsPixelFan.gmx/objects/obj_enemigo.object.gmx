@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(distance_to_object(obj_char_prueba) &gt; 140)
+            <string>if(distance_to_object(obj_infanteria) &gt; 140)
     visible = false;
 else
     visible = true;

@@ -33,21 +33,22 @@ sl_buffer_ymargin = 8;
 sl_maxexposure    = 0.45;
 
 
-sl_sunshadows_active = true//global.sombrasSol; // Active le rendu des ombres solaires 
-sl_sunshadows_texturesize = 0.35;  // Facteur de taille de la texture d'ombre (Entre 0 et 1)
-sl_sunshadows_quality     = 0.5; // Facteur déterminant le nombre de samples composant l'ombre (Entre 0 et 1)
-sl_sunshadows_alpha       = 0.77; // Facteur de transparence de l'ombre (Entre 0 et 1)
-sl_sunshadows_alphalimit  = 0.61; // Taux de luminosité ambiante minimum pour lequel les ombres solaires sont visibles
+sl_sunshadows_active = global.sombrasSol; // Active le rendu des ombres solaires 
+sl_sunshadows_texturesize = 0.8;  // tamaño de la sombra (Entre 0 et 1)
+sl_sunshadows_quality     = 1; // calidad de la sombra (Entre 0 et 1)
+sl_sunshadows_alpha       = 0.4; // transparencia (Entre 0 et 1)
+sl_sunshadows_alphalimit  = 0.6; // Taux de luminosité ambiante minimum pour lequel les ombres solaires sont visibles
 sl_sunshadows_margin      = 200;  // Taille de la marge entourant la surface d'ombre, en pixels
 
-sl_sunshadows_layerscale[0] = 0.2;
+sl_sunshadows_layerscale[0] = 0.05;
 
-sl_ambientshadows_active = global.sombrasAmbiente; // Active le rendu des ombres ambiantes 
-sl_timespeed = (1/240)/2; // velocidad a la que pasa el tiempo
+sl_ambientshadows_active = false//global.sombrasAmbiente; // Active le rendu des ombres ambiantes 
+sl_timespeed = (1/480); // velocidad a la que pasa el tiempo
  
 // Génération des ambient maps 
 SL_sprite_set_ambient(spr_prueba);
-//SL_sprite_set_ambient(spr_t34Cannon);
+SL_sprite_set_ambient(spr_char_prueba);
+SL_sprite_set_ambient(spr_char_arquero);
 //SL_sprite_set_ambient(spr_bullet);
 //SL_sprite_set_ambient(spr_bullet_up);
 //SL_sprite_set_ambient(spr_explosion);
@@ -58,8 +59,8 @@ SL_sprite_set_ambient(spr_prueba);
 // Liste des objets projetant une ombre globale 
 
 SL_global_cast_obj(0,obj_prueba_luz,-1,1,1);
-//SL_global_cast_obj(0,obj_block_transparent,-1,1,1);
-//SL_global_cast_obj(0,obj_bullet,-1,1,1);  
+SL_global_cast_obj(0,obj_char_prueba,-1,1,1);
+SL_global_cast_obj(0,obj_char_prueba_2,-1,1,1);  
 //SL_global_cast_obj(0,obj_caja,-1,1,1);
  
 // Liste des objets lumière 
