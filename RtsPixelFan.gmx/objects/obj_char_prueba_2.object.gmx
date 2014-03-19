@@ -25,10 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ancho=28;
+            <string>event_inherited();
+ancho=28;
 alto=47;
 type = "Arquero";
 velMovi = 2;
+vision = 1.6;
+alcance = 200;
 image_speed = 0;
 selected = false;
 movin = false;
@@ -65,51 +68,7 @@ crearbandera = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///////////patrullar//////
-if(patrullar)
-{    
-    if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
-    {        
-        movin = true;        
-    }
-    if(volver)
-    {
-        mp_potential_step(origx,origy,velMovi,false);        
-        if(origx == x &amp;&amp; origy == y)
-        {
-            volver = false;
-        }
-    }
-    if(movin == true)
-    {    
-        mp_potential_step(destx,desty,velMovi,false);        
-        if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
-        {
-            movin = false;
-            volver = true;        
-        }
-        if(destx == x &amp;&amp; desty == y)
-        {
-            movin = false;
-            if(patrullar)
-                volver = true;
-        }
-    }    
-}
-else
-{
-    ///////movimiento simple/////////
-    if(movin == true)
-    {       
-        mp_potential_step(destx,desty,velMovi,false);        
-        if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
-        {
-            movin = false;
-            destx = 0;
-            desty = 0;
-        }        
-    }
-}
+            <string>event_inherited();
 </string>
           </argument>
         </arguments>

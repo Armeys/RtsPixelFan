@@ -28,7 +28,9 @@
             <string>//////////////control unidades ///////
 ini_open("config/config.ini");
 patrullar = ini_read_string("CONTROLES","patrullar","P");
+atacar = ini_read_string("CONTROLES","atacar","A");
 parar = ini_read_string("CONTROLES","parar","S");
+defensa = ini_read_string("CONTROLES","defensa","S");
 ini_close();
 </string>
           </argument>
@@ -59,6 +61,23 @@ if(keyboard_check_pressed(ord(patrullar)))
 if(keyboard_check_pressed(ord(parar)))
     global.parar = ! global.parar;
 
+if(keyboard_check_pressed(ord(atacar)))
+{
+    with(obj_infanteria)
+    {
+        if(selected)
+            estado = "ataque";
+    }
+}
+
+if(keyboard_check_pressed(ord(defensa)))
+{
+    with(obj_infanteria)
+    {
+        if(selected)
+            estado = "defensa";
+    }
+}
 </string>
           </argument>
         </arguments>

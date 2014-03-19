@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surfaceScale = 1/global.surfaceScale;
+            <string>surfaceScale = 1//global.surfaceScale;
 nieblaNegra = surface_create(room_width * surfaceScale,room_height * surfaceScale);
 nieblaGris = surface_create(room_width * surfaceScale,room_height * surfaceScale);
 createNegro = true;
@@ -93,7 +93,7 @@ alarm[0] = 10;
     with(obj_infanteria)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
     {
         draw_set_blend_mode(bm_src_color);
-        draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale,other.surfaceScale,0,c_white,1);
+        draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,(other.surfaceScale*4/3)*vision,(other.surfaceScale*4/3)*vision,0,c_white,1);
         draw_set_blend_mode(bm_normal);
             
     }
@@ -112,7 +112,7 @@ if (global.nieblaCompleja)
         with(obj_infanteria) // para cada objeto limpiamos la zona de gris. usando de plantilla un sprite
         {
             draw_set_blend_mode(bm_src_color);
-            draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale*3/4,other.surfaceScale*3/4,0,c_white,1);
+            draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,other.surfaceScale*vision,other.surfaceScale * vision,0,c_white,1);
             draw_set_blend_mode(bm_normal);
                 
         }
@@ -120,7 +120,6 @@ if (global.nieblaCompleja)
     }
     draw_surface_ext(nieblaGris,0,0,1/surfaceScale,1/surfaceScale,0,c_white,0.6);
 }
-
 draw_surface_ext(nieblaNegra,0,0,1/surfaceScale,1/surfaceScale,0,c_white,1);   
 </string>
           </argument>

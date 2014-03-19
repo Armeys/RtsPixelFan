@@ -32,6 +32,96 @@ movimiento = 100;
 armadura = 10;
 alcance = 100;
 selected = false;
+estado = "defensa";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///////////patrullar//////
+if(patrullar)
+{    
+    if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
+    {        
+        movin = true;        
+    }
+    if(volver)
+    {
+        mp_potential_step(origx,origy,velMovi,false);        
+        if(origx == x &amp;&amp; origy == y)
+        {
+            volver = false;
+        }
+    }
+    if(movin == true)
+    {    
+        mp_potential_step(destx,desty,velMovi,false);        
+        if (distance_to_point(destx,desty) &lt; 60 &amp;&amp; !place_free(destx,desty))
+        {
+            movin = false;
+            volver = true;        
+        }
+        if(destx == x &amp;&amp; desty == y)
+        {
+            movin = false;
+            if(patrullar)
+                volver = true;
+        }
+    }    
+}
+else
+{
+    ///////movimiento simple/////////
+    if(movin == true)
+    {       
+        mp_potential_step(destx,desty,velMovi,false);        
+        if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
+        {
+            movin = false;
+            destx = 0;
+            desty = 0;
+        }        
+    }
+}
+/////////Atacar/////////
+if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
+{
+    switch(estado)
+    {
+        case "defensa":
+        break;
+        case "ataque":
+            objetivo = instance_nearest(x,y,obj_unit_enemigo);
+            movin = false;
+            patrullar = false;
+            volver = false;
+            if(distance_to_object(obj_unit_enemigo)&gt;= alcance)
+                mp_potential_step(objetivo.x,objetivo.y,velMovi,false);
+        break;
+        case "uir":
+        break;
+    }
+    
+}
+
+
 </string>
           </argument>
         </arguments>

@@ -41,6 +41,7 @@ global.desty = 0;
 global.startx = 0;
 global.starty = 0;
 global.patrullar = false;
+global.atacar = false;
 </string>
           </argument>
         </arguments>

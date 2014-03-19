@@ -138,7 +138,7 @@ if(cantidadTypo > 0)
             }
             
             patrullar = false;
-            movin = true;
+            movin = true;            
             origx = x;
             origy = y;
             destx = other.xx;
