@@ -26,12 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-ancho=28;
-alto=47;
 type = "Arquero";
-velMovi = 2;
-vision = 1.6;
-alcance = 200;
+scr_unidad_infanteria(type);
 image_speed = 0;
 selected = false;
 movin = false;
@@ -159,6 +155,10 @@ with (obj_infanteria)
 {
     selected = false;    
 }
+with (obj_vehiculos) 
+{
+    selected = false;    
+}
 selected = true;
 
 </string>
@@ -183,7 +183,8 @@ selected = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index,0,x,y);
+            <string>event_inherited();
+draw_sprite(sprite_index,0,x,y);
 if(selected)
 {
     draw_set_color(c_dkgray);

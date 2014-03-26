@@ -61,6 +61,8 @@
       <sprite>sprites\spr_char_arquero</sprite>
       <sprite>sprites\spr_enemigo</sprite>
       <sprite>sprites\spr_prueba_iso</sprite>
+      <sprite>sprites\spr_flecha</sprite>
+      <sprite>sprites\spr_mainTank</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -102,6 +104,10 @@
     <scripts name="formacion">
       <script>scripts\scr_formacion_cuadrado.gml</script>
     </scripts>
+    <scripts name="unidades">
+      <script>scripts\scr_unidad_infanteria.gml</script>
+      <script>scripts\scr_unidad_vehiculo.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_prueba</font>
@@ -118,16 +124,18 @@
       <object>objects\obj_infanteria</object>
       <object>objects\obj_vehiculos</object>
       <object>objects\obj_aereos</object>
-      <object>objects\obj_enemigo</object>
+      <object>objects\obj_enemigo_infanteria</object>
     </objects>
     <objects name="prueba a*">
       <object>objects\obj_char_prueba</object>
+      <object>objects\obj_vehiculo_prueba</object>
       <object>objects\obj_char_prueba_2</object>
       <object>objects\obj_noentra</object>
       <object>objects\obj_stop</object>
       <object>objects\obj_bandera_patrulla</object>
       <object>objects\obj_unit_enemigo</object>
       <object>objects\obj_prueba_isometrico</object>
+      <object>objects\obj_flecha</object>
     </objects>
     <objects name="teclado y raton">
       <object>objects\obj_raton</object>

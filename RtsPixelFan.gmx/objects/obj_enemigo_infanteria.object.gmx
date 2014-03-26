@@ -25,13 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//////////////control unidades ///////
-ini_open("config/config.ini");
-patrullar = ini_read_string("CONTROLES","patrullar","P");
-atacar = ini_read_string("CONTROLES","atacar","A");
-parar = ini_read_string("CONTROLES","parar","S");
-defensa = ini_read_string("CONTROLES","defensa","S");
-ini_close();
+            <string>ancho = 0;
+alto = 0;
 </string>
           </argument>
         </arguments>
@@ -54,40 +49,44 @@ ini_close();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///////control unidades///////
-if(keyboard_check_pressed(ord(patrullar)))
-    global.patrullar = !global.patrullar;
-
-if(keyboard_check_pressed(ord(parar)))
-    global.parar = !global.parar;
-
-if(keyboard_check_pressed(ord(atacar)))
-{
-    with(obj_infanteria)
-    {
-        if(selected)
-            estado = "ataque";
-    }
-    with(obj_vehiculos)
-    {
-        if(selected)
-            estado = "ataque";
-    }
-}
-
-if(keyboard_check_pressed(ord(defensa)))
-{
-    with(obj_infanteria)
-    {
-        if(selected)
-            estado = "defensa";
-    }
-    with(obj_vehiculos)
-    {
-        if(selected)
-            estado = "defensa";
-    }
-}
+            <string>if(distance_to_object(instance_nearest(x,y,obj_infanteria)) &lt;= (instance_nearest(x,y,obj_infanteria).vision)*230)
+    visible = true;    
+else if(distance_to_object(instance_nearest(x,y,obj_vehiculos)) &lt;= (instance_nearest(x,y,obj_vehiculos).vision)*230)
+        visible = true;    
+else
+    visible = false;
+    
+if(vida &lt;= 0)
+    instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>xx = x - (ancho / 2) + 1;
+yy = y - (alto / 2) - 5;
+porciento = vida / vidaTotal;
+draw_set_color(c_green);
+draw_rectangle(xx,yy,xx + ((ancho - 1) * porciento) , yy + 5,false);
+draw_set_color(c_black);
+draw_rectangle(xx,yy,xx + (ancho - 1), yy + 5,true);
 </string>
           </argument>
         </arguments>

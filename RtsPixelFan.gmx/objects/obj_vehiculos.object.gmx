@@ -32,6 +32,214 @@ movimiento = 100;
 armadura = 10;
 alcance = 100;
 selected = false;
+estado = "defensa";
+objetivo = 0;
+vel = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ace = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>atack = true;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///////////patrullar//////
+if(patrullar)
+{    
+    if(alarm[1]&lt; 0)
+        if(vel &lt; velMovi)
+        {
+            vel = vel + aceleracion;
+            alarm[1] = 15;
+        }
+    if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
+    {        
+        movin = true;        
+    }
+    if(volver)
+    {
+        mp_potential_step(origx,origy,vel,false);        
+        if(origx == x &amp;&amp; origy == y)
+        {
+            volver = false;
+        }
+    }
+    if(movin == true)
+    {    
+        mp_potential_step(destx,desty,vel,false);        
+        if (distance_to_point(destx,desty) &lt; 60 &amp;&amp; !place_free(destx,desty))
+        {
+            movin = false;
+            volver = true;        
+        }
+        if(destx == x &amp;&amp; desty == y)
+        {
+            movin = false;
+            if(patrullar)
+                volver = true;
+        }
+    }    
+}
+else
+{
+    ///////movimiento simple/////////
+    if(movin == true)
+    {       
+        if(alarm[1]&lt; 0)
+            if(vel &lt; velMovi)
+            {
+                vel = vel + aceleracion;
+                alarm[1] = 15;
+            }            
+        mp_potential_step(destx,desty,vel,false);        
+        if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
+        {
+            movin = false;
+            destx = 0;
+            desty = 0;
+        }        
+    }
+    else
+    {
+        vel = 0;
+    }
+}
+/////////Atacar/////////
+if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
+{
+    switch(estado)
+    {
+        case "defensa":
+        break;
+        case "ataque":
+            near = instance_nearest(x,y,obj_unit_enemigo);
+            movin = false;
+            patrullar = false;
+            volver = false;
+            if(objetivo == 0)
+                objetivo = near;
+            if(distance_to_object(obj_unit_enemigo)&gt;= alcance)
+                mp_potential_step(near.x,near.y,velMovi,false);
+            else
+            {
+                //animacion atacar
+                if(near.vida &gt; 0)
+                {
+                    if(alarm[0] &lt; 0)
+                    {
+                        if(vel_vuelo == 0)
+                        {
+                            near.vida = near.vida - damage;
+                            alarm[0] = vel_ataque;
+                        }
+                        else
+                        {                            
+                            flecha = instance_create(x,y,obj_flecha);
+                            flecha.sprite_index = spr_flecha;
+                            flecha.objetivoX = near.x;
+                            flecha.objetivoY = near.y;
+                            flecha.vel = vel_vuelo;
+                            flecha.damage = damage;
+                            flecha.objetivo = near;
+                            alarm[0] = vel_ataque;
+                        }
+                    }
+                }
+            }
+        break;
+        case "uir":
+        break;
+    }    
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>xx = x - (ancho / 2) + 1;
+yy = y - (alto / 2) - 5;
+porciento = vida / vidaTotal;
+draw_set_color(c_green);
+draw_rectangle(xx,yy,xx + ((ancho - 1) * porciento) , yy + 5,false);
+draw_set_color(c_black);
+draw_rectangle(xx,yy,xx + (ancho - 1), yy + 5,true);
 </string>
           </argument>
         </arguments>

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -106,12 +106,54 @@ if(alarm[0] &lt; 0)
           <argument>
             <kind>1</kind>
             <string>with(obj_stop) instance_destroy();
-cantidad = 0;
-scr_formacion_cuadrado(obj_char_prueba);
-scr_formacion_cuadrado(obj_char_prueba_2);
+if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
+{
+    objetivo = position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria);
+    with(obj_infanteria)
+    {
+       if(selected)
+       {
+            objetivo = other.objetivo;
+            estado = "ataque";
+            destx = mouse_x;
+            desty = mouse_y;
+            movin = true;
+       } 
+    }
+    with(obj_vehiculos)
+    {
+       if(selected)
+       {
+            objetivo = other.objetivo;
+            estado = "ataque";
+            destx = mouse_x;
+            desty = mouse_y;
+            movin = true;
+       } 
+    }   
+}
+else
+{    
+    cantidad = 0;
+    if(instance_exists(obj_char_prueba))
+    {
+        type = "Soldado";
+        scr_formacion_cuadrado(obj_char_prueba);
+    }
+    if(instance_exists(obj_char_prueba_2))
+    {
+        type = "Arquero";
+        scr_formacion_cuadrado(obj_char_prueba_2);
+    }
+    if(instance_exists(obj_vehiculo_prueba))
+    {
+        type = "Tanque";
+        scr_formacion_cuadrado(obj_vehiculo_prueba);
+    }   
+    global.patrullar = false;
+    primeraUnidad = true;
+}
 
-global.patrullar = false;
-primeraUnidad = true;
 </string>
           </argument>
         </arguments>
@@ -160,6 +202,7 @@ primeraUnidad = true;
             <string>if(position_empty(mouse_x,mouse_y))
 {
     with(obj_infanteria)selected = false;
+    with(obj_vehiculos)selected = false;
 }
 pintar = true;
 global.startx = mouse_x;
@@ -171,11 +214,24 @@ if(dbclick &gt; 0)
 {
     //////seleccion de unidades del mismo tipo dentro de la vision.
     inst= instance_position(mouse_x,mouse_y,obj_infanteria);
+    instV = instance_position(mouse_x,mouse_y,obj_vehiculos);
     
     if (instance_exists(inst))  
     {        
         type = inst.type;        
         with(obj_infanteria)
+        {
+            if(other.type == type)
+                ////control que este dentro de la vision.
+                if(x &gt; view_xview[0] &amp;&amp; x &lt; (view_xview[0] + view_wview[0]-5))
+                    if(y &gt; view_yview[0] &amp;&amp; y &lt; (view_yview[0] + view_hview[0] + 5))
+                        selected = true;
+        }        
+    }
+    if (instance_exists(instV))  
+    {        
+        type = instV.type;
+        with(obj_vehiculos)
         {
             if(other.type == type)
                 ////control que este dentro de la vision.

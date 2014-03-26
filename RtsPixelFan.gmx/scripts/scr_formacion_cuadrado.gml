@@ -8,11 +8,34 @@ with(obj_infanteria)
     if(selected)
     {
         if(other.unidad.type == type)  //// cuanta las unidades de este tipo.     
-            other.cantidadTypo++;          
+        {    
+            other.cantidadTypo++;
+            estado = "defensa";
+        }          
         
         if(other.primeraUnidad == true)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
-        {
-            other.cantidad++;            
+        {            
+            other.cantidad++;                        
+            other.minx = min(other.minx,x);
+            other.miny = min(other.miny,y);
+            other.maxx = max(other.maxx,x);
+            other.maxy = max(other.maxy,y);
+        }                                          
+    }
+}
+with(obj_vehiculos)  
+{        
+    if(selected)
+    {
+        if(other.unidad.type == type)  //// cuanta las unidades de este tipo.     
+        {    
+            other.cantidadTypo++;
+            estado = "defensa";
+        }          
+        
+        if(other.primeraUnidad == true)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
+        {            
+            other.cantidad++;                        
             other.minx = min(other.minx,x);
             other.miny = min(other.miny,y);
             other.maxx = max(other.maxx,x);
@@ -106,22 +129,22 @@ if(cantidadTypo > 0)
             banderasalida.cantidad = cantidad;        
             banderadestino = instance_create(mouse_x,mouse_y,obj_bandera_patrulla);
             banderadestino.image_index = 1;
-            banderadestino.cantidad = cantidad;
+            banderadestino.cantidad = cantidad;            
         }            
     }
     
     with(unidad)
-    {     
+    {    
         if(other.contador == other.columnas && other.cantidad >3)  // cuando coinciden saltamos a la siguiente fila
         {                
-            other.yy = other.yy + alto ;
+            other.yy = other.yy + alto + 7;// +7 para separar las barras de vida.
             other.xx = other.xxStart;
             other.contador = 0;            
         }            
         if(selected)//añadimos el movimiento a la unidad.
-        {                
+        {    
             if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
-            {
+            {                
                 with(obj_bandera_patrulla)
                 {
                     if(id == other.banderadest)
@@ -135,8 +158,7 @@ if(cantidadTypo > 0)
                         other.banderaorig = 0;
                     }
                 }
-            }
-            
+            }            
             patrullar = false;
             movin = true;            
             origx = x;
