@@ -3,39 +3,17 @@
 
 unidad = argument0;
 cantidadTypo = 0;
-with(obj_infanteria)  
+with(unidad)  
 {        
     if(selected)
     {
-        if(other.unidad.type == type)  //// cuanta las unidades de este tipo.     
+        if(other.type == type)  //// cuanta las unidades de este tipo.     
         {    
             other.cantidadTypo++;
-            estado = "defensa";
         }          
         
         if(other.primeraUnidad == true)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
-        {            
-            other.cantidad++;                        
-            other.minx = min(other.minx,x);
-            other.miny = min(other.miny,y);
-            other.maxx = max(other.maxx,x);
-            other.maxy = max(other.maxy,y);
-        }                                          
-    }
-}
-with(obj_vehiculos)  
-{        
-    if(selected)
-    {
-        if(other.unidad.type == type)  //// cuanta las unidades de este tipo.     
-        {    
-            other.cantidadTypo++;
-            estado = "defensa";
-        }          
-        
-        if(other.primeraUnidad == true)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
-        {            
-            other.cantidad++;                        
+        {                       
             other.minx = min(other.minx,x);
             other.miny = min(other.miny,y);
             other.maxx = max(other.maxx,x);
@@ -49,7 +27,7 @@ with(obj_vehiculos)
 if(cantidadTypo > 0)  
 {   
     /// calculo del numero de filas
-    filas = round(sqrt(cantidad));
+    filas = round(sqrt(cantidad));    
 
     /// calculo del numero de columnas de la unidad    
     if (cantidad >0 && cantidad <=9)    
@@ -89,8 +67,16 @@ if(cantidadTypo > 0)
                 yy = mouse_y - (unidad.alto * (floor(filas/2)));
         }
         else
-        {
-            yy = yy + unidad.alto + 10;
+        {   
+            if(fila < ceil(cantidadAnterior/columnas))
+            {                
+                yy = yy + unidad.alto + 10;
+                fila = 0;                               
+            }
+            else
+            {
+                fila = 0;
+            }
         }
     }
     else  // formacion para 3 o menso unidades.
@@ -98,13 +84,14 @@ if(cantidadTypo > 0)
         switch(cantidadTypo)
         {
             case 1:
-                xx = mouse_x;
+                xx = mouse_x;                
             break;
             case 2:
                 xx = mouse_x - (unidad.ancho/2);
             break;
             case 3:
                 xx = mouse_x - unidad.ancho;
+                xxStart = xx;
             break;
         }
         /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
@@ -114,11 +101,20 @@ if(cantidadTypo > 0)
         }
         else
         {
-            yy = yy + unidad.alto + 10;
+            if(fila < ceil(cantidadAnterior/columnas))
+            {                
+                yy = yy + unidad.alto + 10;
+                fila = 0;                
+            }
+            else
+            {
+                fila = 0;
+            }
         }     
     }        
-                   
-    contador = 0; 
+                  
+    contador = 0;     
+    cantidadAnterior = cantidadTypo;    
     if(global.patrullar) // calculamos donde vamos a colocar las banderas. la de inicio en el centro de la pisicion inicial de las unidades
     {                    // la de destino en la posicion del raton. les asignamos la cantidad de unidades q van a hacer esa patrulla.
         banderax = minx + ((maxx - minx)/2);
@@ -132,14 +128,15 @@ if(cantidadTypo > 0)
             banderadestino.cantidad = cantidad;            
         }            
     }
-    
+    actual = 0;
     with(unidad)
     {    
-        if(other.contador == other.columnas && other.cantidad >3)  // cuando coinciden saltamos a la siguiente fila
+        if(other.contador == other.columnas && other.cantidad >3 && other.cantidadTypo > other.actual)  // cuando coinciden saltamos a la siguiente fila
         {                
             other.yy = other.yy + alto + 7;// +7 para separar las barras de vida.
             other.xx = other.xxStart;
-            other.contador = 0;            
+            other.contador = 0;
+            other.fila = other.fila +1;            
         }            
         if(selected)//añadimos el movimiento a la unidad.
         {    
@@ -166,10 +163,12 @@ if(cantidadTypo > 0)
             destx = other.xx;
             desty = other.yy;                
             banderadest = other.banderadestino;
-            banderaorig = other.banderasalida;                              
+            banderaorig = other.banderasalida;
+            objetivo = 0;                              
             instance_create(other.xx,other.yy,obj_stop);
             other.xx = other.xx + ancho;
-            other.contador++; 
+            other.contador++;
+            other.actual++; 
             if(global.patrullar)
             {
                 patrullar = true;                     

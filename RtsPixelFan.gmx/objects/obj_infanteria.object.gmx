@@ -136,36 +136,45 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
             objetivo = 0;
         break;
         case "ataque":
-            near = instance_nearest(x,y,obj_unit_enemigo);
-            movin = false;
-            patrullar = false;
-            volver = false;
-            if(objetivo == 0)
-                objetivo = near;
-            if(distance_to_object(obj_unit_enemigo)&gt;= alcance)
-                mp_potential_step(near.x,near.y,velMovi,false);
-            else
-            {
-                //animacion atacar
-                if(near.vida &gt; 0)
+            if(patrullar == true || movin == false || objetivo != 0)
+            {                
+                near = instance_nearest(x,y,obj_unit_enemigo);
+                movin = false;
+                patrullar = false;
+                volver = false;
+                if(objetivo == 0)
                 {
-                    if(alarm[0] &lt; 0)
+                    objetivo = near;
+                    show_message("no objetivo");
+                }
+                //if(distance_to_object(objetivo) &gt;= alcance)
+                {
+                    mp_potential_step(destx,desty,velMovi,false);
+                    show_message(string(destx) +"  " +string(desty))
+                }
+                else
+                {
+                    //animacion atacar
+                    if(objetivo.vida &gt; 0)
                     {
-                        if(vel_vuelo == 0)
+                        if(alarm[0] &lt; 0)
                         {
-                            near.vida = near.vida - damage;
-                            alarm[0] = vel_ataque;
-                        }
-                        else
-                        {                            
-                            flecha = instance_create(x,y,obj_flecha);
-                            flecha.sprite_index = spr_flecha;
-                            flecha.objetivoX = near.x;
-                            flecha.objetivoY = near.y;
-                            flecha.vel = vel_vuelo;
-                            flecha.damage = damage;
-                            flecha.objetivo = near;
-                            alarm[0] = vel_ataque;
+                            if(vel_vuelo == 0)
+                            {
+                                objetivo.vida = objetivo.vida - damage;
+                                alarm[0] = vel_ataque;
+                            }
+                            else
+                            {                            
+                                flecha = instance_create(x,y,obj_flecha);
+                                flecha.sprite_index = spr_flecha;
+                                flecha.objetivoX = objetivo.x;
+                                flecha.objetivoY = objetivo.y;
+                                flecha.vel = vel_vuelo;
+                                flecha.damage = damage;
+                                flecha.objetivo = objetivo;
+                                alarm[0] = vel_ataque;
+                            }
                         }
                     }
                 }

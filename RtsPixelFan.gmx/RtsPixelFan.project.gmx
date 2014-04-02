@@ -63,6 +63,7 @@
       <sprite>sprites\spr_prueba_iso</sprite>
       <sprite>sprites\spr_flecha</sprite>
       <sprite>sprites\spr_mainTank</sprite>
+      <sprite>sprites\spr_bloqueo_izq</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -79,6 +80,8 @@
   <backgrounds name="background">
     <background>background\bgm_title</background>
     <background>background\bg_prueba</background>
+    <background>background\background2</background>
+    <background>background\part4_tileset</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -131,6 +134,7 @@
       <object>objects\obj_vehiculo_prueba</object>
       <object>objects\obj_char_prueba_2</object>
       <object>objects\obj_noentra</object>
+      <object>objects\obj_noentra_izq</object>
       <object>objects\obj_stop</object>
       <object>objects\obj_bandera_patrulla</object>
       <object>objects\obj_unit_enemigo</object>
@@ -155,7 +159,9 @@
   <rooms name="rooms">
     <room>rooms\rm_change</room>
     <room>rooms\rm_inicio</room>
+    <room>rooms\rm_prueba2</room>
     <room>rooms\rm_prueba</room>
+    <room>rooms\prueba_2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

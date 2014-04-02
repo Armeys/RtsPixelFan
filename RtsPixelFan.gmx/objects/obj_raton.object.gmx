@@ -108,7 +108,7 @@ if(alarm[0] &lt; 0)
             <string>with(obj_stop) instance_destroy();
 if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
 {
-    objetivo = position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria);
+    objetivo = position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria);    
     with(obj_infanteria)
     {
        if(selected)
@@ -117,7 +117,7 @@ if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
             estado = "ataque";
             destx = mouse_x;
             desty = mouse_y;
-            movin = true;
+            movin = true;            
        } 
     }
     with(obj_vehiculos)
@@ -128,13 +128,30 @@ if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
             estado = "ataque";
             destx = mouse_x;
             desty = mouse_y;
-            movin = true;
+            movin = true;            
        } 
     }   
 }
 else
 {    
     cantidad = 0;
+    cantidadAnterior = 0;
+    fila = 0;
+    with(obj_infanteria)  
+    {        
+        if(selected)
+        {
+            other.cantidad++;                         
+        }
+    }
+    with(obj_vehiculos)  
+    {        
+        if(selected)
+        {
+            other.cantidad++;                         
+        }
+    }
+    
     if(instance_exists(obj_char_prueba))
     {
         type = "Soldado";
