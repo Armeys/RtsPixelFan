@@ -48,9 +48,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_towards_point(objetivoX,objetivoY,vel);
-if (instance_exists(objetivo))
-{   
+            <string>if (instance_exists(objetivo))
+{       
+    move_towards_point(objetivo.x,objetivo.y,vel);
     if(position_meeting(x,y,objetivo))
     {
         if(objetivo.vida &gt; 0)
@@ -86,7 +86,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dir = point_direction(x,y,objetivoX,objetivoY);
+            <string>dir = point_direction(x,y,objetivo.x,objetivo.y);
 draw_sprite_ext(sprite_index,0,x,y,1,1,dir,c_white,1);
 </string>
           </argument>

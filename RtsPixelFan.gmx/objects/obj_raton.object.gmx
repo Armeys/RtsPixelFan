@@ -34,6 +34,7 @@ banderasalida = 0;
 banderadestino = 0;
 primeraUnidad = true;
 dbclick = -1;
+direccionMovimiento = 0;
 </string>
           </argument>
         </arguments>
@@ -107,8 +108,8 @@ if(alarm[0] &lt; 0)
             <kind>1</kind>
             <string>with(obj_stop) instance_destroy();
 if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
-{
-    objetivo = position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria);    
+{    
+    objetivo = instance_position(mouse_x,mouse_y,obj_unit_enemigo); 
     with(obj_infanteria)
     {
        if(selected)
@@ -137,6 +138,7 @@ else
     cantidad = 0;
     cantidadAnterior = 0;
     fila = 0;
+    filaActual = 0;
     with(obj_infanteria)  
     {        
         if(selected)

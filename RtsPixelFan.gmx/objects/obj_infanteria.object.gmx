@@ -144,13 +144,14 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
                 volver = false;
                 if(objetivo == 0)
                 {
-                    objetivo = near;
-                    show_message("no objetivo");
+                    objetivo = near;                    
                 }
-                //if(distance_to_object(objetivo) &gt;= alcance)
+                if(distance_to_object(objetivo) &gt;= alcance)
                 {
-                    mp_potential_step(destx,desty,velMovi,false);
-                    show_message(string(destx) +"  " +string(desty))
+                    if(instance_exists(objetivo))
+                        mp_potential_step(objetivo.x,objetivo.y,velMovi,false);
+                    else
+                        objetivo = 0;                    
                 }
                 else
                 {
@@ -168,8 +169,6 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
                             {                            
                                 flecha = instance_create(x,y,obj_flecha);
                                 flecha.sprite_index = spr_flecha;
-                                flecha.objetivoX = objetivo.x;
-                                flecha.objetivoY = objetivo.y;
                                 flecha.vel = vel_vuelo;
                                 flecha.damage = damage;
                                 flecha.objetivo = objetivo;
@@ -179,15 +178,9 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
                     }
                 }
             }
-        break;
-        case "uir":
-            objetivo = 0;
-        break;
+        break;        
     }
-    
 }
-
-
 </string>
           </argument>
         </arguments>
