@@ -5,7 +5,7 @@
   <height>1600</height>
   <vsnap>32</vsnap>
   <hsnap>64</hsnap>
-  <isometric>-1</isometric>
+  <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
   <colour>0</colour>

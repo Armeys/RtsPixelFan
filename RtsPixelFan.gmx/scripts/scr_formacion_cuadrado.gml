@@ -70,69 +70,30 @@ if(cantidadTypo > 0)
             switch(other.direccionMovimiento)
             {            
                 case 1:
-                    if(columnas == filas)/// si es par ay que restarle media unidad para que se centre con el raton.
-                        xxStart = mouse_x - 64 * (columnas-1);//((64)*(floor(columnas/2)-0.5));
-                    else
-                        xxStart = mouse_x - 64 * (columnas - (filas/2)+0.5);//((64)*(floor(columnas/2)));
+                    xxStart = mouse_x - (64 *((columnas-1)));
                     xx = xxStart;
-                    if(columnas == filas)
-                        yyStart = mouse_y;
-                    else
-                        yyStart = mouse_y + 16;
-                    yy = yyStart;                    
-                break;
-                case 2:
-                    if(columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.
-                        xxStart = mouse_x + 64 * ((columnas/2)+0.5);//((64)*(floor(columnas/2)-0.5));
-                    else
-                        xxStart = mouse_x + 64 * ((columnas/2));//((64)*(floor(columnas/2)));
-                    xx = xxStart;
-                    if(columnas % 2 == 0)
-                        yyStart = mouse_y -32;
-                    else
-                        yyStart = mouse_y;
-                    yy = yyStart;                
-                break;
-                case 3:
-                    if(columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.
-                        xxStart = mouse_x + 64 * ((columnas/2)+0.5);//((64)*(floor(columnas/2)-0.5));
-                    else
-                        xxStart = mouse_x + 64 * ((columnas/2));//((64)*(floor(columnas/2)));
-                    xx = xxStart;
-                    if(columnas % 2 == 0)
-                        yyStart = mouse_y -32;
-                    else
-                        yyStart = mouse_y;
-                    yy = yyStart;                   
-                break;
-                case 4:
-                    if(columnas == filas)/// si es par ay que restarle media unidad para que se centre con el raton.
-                        xxStart = mouse_x - 64 * (columnas-1);//((64)*(floor(columnas/2)-0.5));
-                    else
-                        xxStart = mouse_x - 64 * (columnas - (filas/2)+0.5);//((64)*(floor(columnas/2)));
-                    xx = xxStart;
-                    if(columnas == filas)
-                        yyStart = mouse_y;
-                    else
-                        yyStart = mouse_y + 16;
+                    yyStart = mouse_y;                    
                     yy = yyStart;
                 break;
+                case 2:
+                    xxStart = mouse_x;
+                    xx = xxStart;
+                    yyStart = mouse_y -(32 *((columnas-1)));                    
+                    yy = yyStart;              
+                break;
+                case 3:
+                    xxStart = mouse_x - (64 *((columnas-1)));
+                    xx = xxStart;
+                    yyStart = mouse_y;                    
+                    yy = yyStart;                
+                break;
+                case 4:
+                    xxStart = mouse_x;
+                    xx = xxStart;
+                    yyStart = mouse_y +(32 *((columnas-1)));                    
+                    yy = yyStart;                    
+                break;
             }
-            
-            // calculamos x de la unidad de la esquina superior izq en relacion con el raton.       
-            /*if(columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.
-                xxStart = mouse_x - ((128)*(floor(columnas/2)-0.5));
-            else
-                xxStart = mouse_x - ((128)*(floor(columnas/2)));
-            xx = xxStart;    //posicion de la primera columna
-            // calculamos y de la unidad de la esquina superior izq en relacion con el raton.        
-            /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
-                   
-            if(filas % 2 == 0)
-                yyStart = mouse_y - (16 * (floor(filas/2)-0.5));
-            else
-                yyStart = mouse_y - (16 *(floor(filas/2)));
-            yy = yyStart;*/
         }
         else
         {   
@@ -184,19 +145,32 @@ if(cantidadTypo > 0)
             switch(cantidadTypo)
             {
                 case 1:
-                    xx = mouse_x;                
+                    xx = mouse_x;
+                    yy = mouse_y;                
                 break;
                 case 2:
-                    xx = mouse_x - (unidad.ancho/2);
+                    xx = mouse_x - 32;
+                    yy = mouse_y;
                 break;
                 case 3:
-                    xx = mouse_x - unidad.ancho;
+                    xx = mouse_x - 64;
+                    switch(other.direccionMovimiento)
+                    {
+                        case 1:
+                        case 4:
+                            yy = mouse_y + 32;
+                        break;
+                        case 2:
+                        case 3:
+                            yy = mouse_y - 32;
+                        break;
+                    }
+                    
                     xxStart = xx;
                 break;
             }
             /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
-        
-            yy = mouse_y;
+            
             yyStart = yy;            
         }
         else

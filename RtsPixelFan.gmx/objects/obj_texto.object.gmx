@@ -25,17 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xx = view_xview[0];
-yy = view_yview[0];
-draw_set_font(fnt_prueba);
-draw_set_color(c_white);
-draw_text(xx + 10, yy + 10, "carga " + string(obj_minions.carga));
-draw_text(xx + 80, yy + 10, "material en mina " + string(obj_recursos.material));
-draw_text(xx + 250, yy + 10, "material guardado " + string(obj_casa.material));
-draw_text(xx + 420, yy + 10, "fps " + string(fps) + " " + "fps real " + string(fps_real) + " hora " + string(global.sl_time));
-draw_text(xx + 10, yy + 30,string('Presiona "P" para formar patrullas.'));
-draw_text(xx + 10, yy + 50,string('Presiona "A" para activar modo agresivo.'));
-draw_text(xx + 10, yy + 70,string('Presiona "D" para activar modo defensivo.'));
+            <string>if(view_current == 0)
+{
+    xx = view_xview[0];
+    yy = view_yview[0];
+    draw_set_font(fnt_prueba);
+    draw_set_color(c_white);
+    draw_text(xx + 10, yy + 10, "carga " + string(obj_minions.carga));
+    draw_text(xx + 80, yy + 10, "material en mina " + string(obj_recursos.material));
+    draw_text(xx + 250, yy + 10, "material guardado " + string(obj_casa.material));
+    draw_text(xx + 420, yy + 10, "fps " + string(fps) + " " + "fps real " + string(fps_real) + " hora " + string(global.sl_time));
+    draw_text(xx + 10, yy + 30,string('Presiona "P" para formar patrullas.'));
+    draw_text(xx + 10, yy + 50,string('Presiona "A" para activar modo agresivo.'));
+    draw_text(xx + 10, yy + 70,string('Presiona "D" para activar modo defensivo.'));
+    draw_text(xx + 10, yy + 90,string(display_mouse_get_x()) + " " + string(obj_control_camara.xMouse));
+}
 </string>
           </argument>
         </arguments>

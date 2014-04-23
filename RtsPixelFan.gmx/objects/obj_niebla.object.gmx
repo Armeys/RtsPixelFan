@@ -88,21 +88,18 @@ alarm[0] = 10;
     {
         draw_clear(c_black);
         createNegro = false;
-    }
-    
+    }    
     with(obj_infanteria)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
     {
         draw_set_blend_mode(bm_src_color);
         draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,(other.surfaceScale*4/3)*vision,(other.surfaceScale*4/3)*vision,0,c_white,1);
-        draw_set_blend_mode(bm_normal);
-            
+        draw_set_blend_mode(bm_normal);            
     }
     with(obj_vehiculos)  // para cada objeto limpiamos la zona de negro. usando de plantilla un sprite
     {
         draw_set_blend_mode(bm_src_color);
         draw_sprite_ext(spr_limpia_niebla,0,x*other.surfaceScale,y*other.surfaceScale,(other.surfaceScale*4/3)*vision,(other.surfaceScale*4/3)*vision,0,c_white,1);
-        draw_set_blend_mode(bm_normal);
-            
+        draw_set_blend_mode(bm_normal);            
     }
     surface_reset_target();
 }

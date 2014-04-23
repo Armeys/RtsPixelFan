@@ -84,6 +84,7 @@
     <background>background\bg_prueba</background>
     <background>background\background2</background>
     <background>background\part4_tileset</background>
+    <background>background\bg_mapa_test</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -130,6 +131,8 @@
       <object>objects\obj_vehiculos</object>
       <object>objects\obj_aereos</object>
       <object>objects\obj_enemigo_infanteria</object>
+      <object>objects\obj_aliado</object>
+      <object>objects\obj_enemigo</object>
     </objects>
     <objects name="prueba a*">
       <object>objects\obj_char_prueba</object>
