@@ -66,6 +66,8 @@
       <sprite>sprites\spr_mainTank</sprite>
       <sprite>sprites\spr_bloqueo_izq</sprite>
       <sprite>sprites\spr_bloqueo_der</sprite>
+      <sprite>sprites\spr_minimap_unidad</sprite>
+      <sprite>sprites\spr_minimap_edificio</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -80,11 +82,7 @@
     </sprites>
   </sprites>
   <backgrounds name="background">
-    <background>background\bgm_title</background>
-    <background>background\bg_prueba</background>
-    <background>background\background2</background>
     <background>background\part4_tileset</background>
-    <background>background\bg_mapa_test</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -119,13 +117,6 @@
     <font>fonts\fnt_prueba</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_iniciar_game</object>
-    <objects name="luces">
-      <object>objects\obj_engine</object>
-      <object>objects\obj_change</object>
-      <object>objects\obj_prueba_luz</object>
-      <object>objects\obj_niebla</object>
-    </objects>
     <objects name="objetos parent">
       <object>objects\obj_infanteria</object>
       <object>objects\obj_vehiculos</object>
@@ -148,10 +139,18 @@
       <object>objects\obj_prueba_isometrico</object>
       <object>objects\obj_flecha</object>
     </objects>
-    <objects name="teclado y raton">
+    <objects name="objetos globales">
+      <objects name="luces">
+        <object>objects\obj_engine</object>
+        <object>objects\obj_change</object>
+        <object>objects\obj_prueba_luz</object>
+        <object>objects\obj_niebla</object>
+      </objects>
       <object>objects\obj_raton</object>
       <object>objects\obj_control_camara</object>
       <object>objects\obj_teclado</object>
+      <object>objects\obj_minimapa</object>
+      <object>objects\obj_iniciar_game</object>
     </objects>
     <objects name="prueba recursos">
       <object>objects\obj_casa</object>

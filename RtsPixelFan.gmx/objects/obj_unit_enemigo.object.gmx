@@ -75,7 +75,6 @@ vidaTotal = 100;
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-draw_sprite(sprite_index,0,x,y);
 </string>
           </argument>
         </arguments>

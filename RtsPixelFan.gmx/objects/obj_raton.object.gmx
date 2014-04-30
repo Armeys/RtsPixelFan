@@ -106,73 +106,78 @@ if(alarm[0] &lt; 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(obj_stop) instance_destroy();
-if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
-{    
-    objetivo = instance_position(mouse_x,mouse_y,obj_unit_enemigo); 
-    with(obj_infanteria)
-    {
-       if(selected)
-       {
-            objetivo = other.objetivo;
-            estado = "ataque";
-            destx = mouse_x;
-            desty = mouse_y;
-            movin = true;            
-       } 
-    }
-    with(obj_vehiculos)
-    {
-       if(selected)
-       {
-            objetivo = other.objetivo;
-            estado = "ataque";
-            destx = mouse_x;
-            desty = mouse_y;
-            movin = true;            
-       } 
-    }   
-}
-else
-{    
-    cantidad = 0;
-    cantidadAnterior = 0;
-    fila = 0;
-    filaActual = 0;
-    with(obj_infanteria)  
-    {        
-        if(selected)
+            <string>///comprobar que pincha dentro del mapa.
+if(tile_layer_find(1000,mouse_x,mouse_y) &gt; -1)
+{     
+    with(obj_stop) instance_destroy();
+    //atacar a un enemigo.
+    if(position_meeting(mouse_x,mouse_y,obj_enemigo_infanteria))
+    {    
+        objetivo = instance_position(mouse_x,mouse_y,obj_unit_enemigo); 
+        with(obj_infanteria)
         {
-            other.cantidad++;                         
+           if(selected)
+           {
+                objetivo = other.objetivo;
+                estado = "ataque";
+                destx = mouse_x;
+                desty = mouse_y;
+                movin = true;            
+           } 
         }
-    }
-    with(obj_vehiculos)  
-    {        
-        if(selected)
+        with(obj_vehiculos)
         {
-            other.cantidad++;                         
+           if(selected)
+           {
+                objetivo = other.objetivo;
+                estado = "ataque";
+                destx = mouse_x;
+                desty = mouse_y;
+                movin = true;            
+           } 
+        }   
+    }
+    ///mover unidades seleccionadas.
+    else
+    {    
+        cantidad = 0;
+        cantidadAnterior = 0;
+        fila = 0;
+        filaActual = 0;
+        with(obj_infanteria)  
+        {        
+            if(selected)
+            {
+                other.cantidad++;                         
+            }
         }
+        with(obj_vehiculos)  
+        {        
+            if(selected)
+            {
+                other.cantidad++;                         
+            }
+        }
+        
+        if(instance_exists(obj_char_prueba))
+        {
+            type = "Soldado";
+            scr_formacion_cuadrado(obj_char_prueba);
+        }
+        if(instance_exists(obj_char_prueba_2))
+        {
+            type = "Arquero";
+            scr_formacion_cuadrado(obj_char_prueba_2);
+        }
+        if(instance_exists(obj_vehiculo_prueba))
+        {
+            type = "Tanque";
+            scr_formacion_cuadrado(obj_vehiculo_prueba);
+        }   
+        global.patrullar = false;
+        primeraUnidad = true;
     }
-    
-    if(instance_exists(obj_char_prueba))
-    {
-        type = "Soldado";
-        scr_formacion_cuadrado(obj_char_prueba);
-    }
-    if(instance_exists(obj_char_prueba_2))
-    {
-        type = "Arquero";
-        scr_formacion_cuadrado(obj_char_prueba_2);
-    }
-    if(instance_exists(obj_vehiculo_prueba))
-    {
-        type = "Tanque";
-        scr_formacion_cuadrado(obj_vehiculo_prueba);
-    }   
-    global.patrullar = false;
-    primeraUnidad = true;
 }
-
 </string>
           </argument>
         </arguments>
@@ -218,48 +223,58 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(position_empty(mouse_x,mouse_y))
-{
-    with(obj_infanteria)selected = false;
-    with(obj_vehiculos)selected = false;
+            <string>// click en el mini-mapa
+if(display_mouse_get_x() &lt; (view_wport[1] + view_xport[1]) &amp;&amp; display_mouse_get_x() &gt; view_xport[1] &amp;&amp; display_mouse_get_y() &gt; view_yport[1] &amp;&amp; display_mouse_get_y() &lt; (view_yport[1] + view_hport[1]))
+{    
+    view_xview[0] = mouse_x - (view_wview[0]/2);
+    view_yview[0] = mouse_y - (view_hview[0]/2);    
 }
-pintar = true;
-global.startx = mouse_x;
-global.starty = mouse_y;
-
-///double-click////
-dbclick ++;
-if(dbclick &gt; 0)
+else
 {
-    //////seleccion de unidades del mismo tipo dentro de la vision.
-    inst= instance_position(mouse_x,mouse_y,obj_infanteria);
-    instV = instance_position(mouse_x,mouse_y,obj_vehiculos);
-    
-    if (instance_exists(inst))  
-    {        
-        type = inst.type;        
-        with(obj_infanteria)
-        {
-            if(other.type == type)
-                ////control que este dentro de la vision.
-                if(x &gt; view_xview[0] &amp;&amp; x &lt; (view_xview[0] + view_wview[0]-5))
-                    if(y &gt; view_yview[0] &amp;&amp; y &lt; (view_yview[0] + view_hview[0] + 5))
-                        selected = true;
-        }        
+    ///click en vacio. para deseleccionar.
+    if(position_empty(mouse_x,mouse_y))
+    {
+        with(obj_infanteria)selected = false;
+        with(obj_vehiculos)selected = false;
     }
-    if (instance_exists(instV))  
-    {        
-        type = instV.type;
-        with(obj_vehiculos)
-        {
-            if(other.type == type)
-                ////control que este dentro de la vision.
-                if(x &gt; view_xview[0] &amp;&amp; x &lt; (view_xview[0] + view_wview[0]-5))
-                    if(y &gt; view_yview[0] &amp;&amp; y &lt; (view_yview[0] + view_hview[0] + 5))
-                        selected = true;
+    ///si se mantiene pulsado guardamos la x e y inicial para dibujar el rectangulo de seleccion.
+    pintar = true;
+    global.startx = mouse_x;
+    global.starty = mouse_y;  
+    ///double-click en unidad para seleccionar todas las del mismo tipo.////
+    dbclick ++;
+    if(dbclick &gt; 0)
+    {
+        //////seleccion de unidades del mismo tipo dentro de la vision.
+        inst= instance_position(mouse_x,mouse_y,obj_infanteria);
+        instV = instance_position(mouse_x,mouse_y,obj_vehiculos);
+        
+        if (instance_exists(inst))  
+        {        
+            type = inst.type;        
+            with(obj_infanteria)
+            {
+                if(other.type == type)
+                    ////control que este dentro de la vision.
+                    if(x &gt; view_xview[0] &amp;&amp; x &lt; (view_xview[0] + view_wview[0]-5))
+                        if(y &gt; view_yview[0] &amp;&amp; y &lt; (view_yview[0] + view_hview[0] + 5))
+                            selected = true;
+            }        
         }
+        if (instance_exists(instV))  
+        {        
+            type = instV.type;
+            with(obj_vehiculos)
+            {
+                if(other.type == type)
+                    ////control que este dentro de la vision.
+                    if(x &gt; view_xview[0] &amp;&amp; x &lt; (view_xview[0] + view_wview[0]-5))
+                        if(y &gt; view_yview[0] &amp;&amp; y &lt; (view_yview[0] + view_hview[0] + 5))
+                            selected = true;
+            }
+        }
+        dbclick = -1;
     }
-    dbclick = -1;
 }
 </string>
           </argument>

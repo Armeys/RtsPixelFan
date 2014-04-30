@@ -240,13 +240,27 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xx = x - (ancho / 2) + 1;
-yy = y - (alto / 2) - 5;
-porciento = vida / vidaTotal;
-draw_set_color(c_green);
-draw_rectangle(xx,yy,xx + ((ancho - 1) * porciento) , yy + 5,false);
-draw_set_color(c_black);
-draw_rectangle(xx,yy,xx + (ancho - 1), yy + 5,true);
+            <string>if(view_current == 0)
+{
+    xx = x - (ancho / 2) + 1;
+    yy = y - (alto / 2) - 5;
+    porciento = vida / vidaTotal;
+    draw_set_color(c_green);
+    draw_rectangle(xx,yy,xx + ((ancho - 1) * porciento) , yy + 5,false);
+    draw_set_color(c_black);
+    draw_rectangle(xx,yy,xx + (ancho - 1), yy + 5,true);
+    
+    draw_sprite(sprite_index,0,x,y);
+    if(selected)
+    {
+        draw_set_color(c_dkgray);
+        draw_circle(x,y,22,true);
+    }
+}
+else
+{
+    draw_sprite(spr_minimap_unidad,0,x,y);
+}
 </string>
           </argument>
         </arguments>

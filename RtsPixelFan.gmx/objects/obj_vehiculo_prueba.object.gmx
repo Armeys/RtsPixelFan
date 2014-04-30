@@ -184,12 +184,6 @@ selected = true;
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-draw_sprite(sprite_index,0,x,y);
-if(selected)
-{
-    draw_set_color(c_dkgray);
-    draw_circle(x,y,22,true);
-}
 </string>
           </argument>
         </arguments>

@@ -86,8 +86,11 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dir = point_direction(x,y,objetivo.x,objetivo.y);
-draw_sprite_ext(sprite_index,0,x,y,1,1,dir,c_white,1);
+            <string>if(view_current == 0)
+{
+    dir = point_direction(x,y,objetivo.x,objetivo.y);
+    draw_sprite_ext(sprite_index,0,x,y,1,1,dir,c_white,1);
+}
 </string>
           </argument>
         </arguments>

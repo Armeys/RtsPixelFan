@@ -236,6 +236,78 @@ if(cantidadTypo > 0)
     actual = 0;
     with(unidad)
     {    
+        while(tile_layer_find(1000,other.xx,other.yy) == -1)
+        {
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy + (32);
+                break;
+                case 4:
+                    other.xx = other.xx - (64);            
+                    other.yy = other.yy - (32);
+                break;
+                case 2:
+                    other.xx = other.xx - (64);            
+                    other.yy = other.yy + (32);
+                break;
+                case 3:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy - (32);
+                break;
+                
+            }                     
+        }                  
+        if(selected)//añadimos el movimiento a la unidad.
+        {    
+            if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
+            {                
+                with(obj_bandera_patrulla)
+                {
+                    if(id == other.banderadest)
+                    {
+                        cantidad--;                            
+                        other.banderadest = 0;
+                    }
+                    if(id == other.banderaorig)
+                    {
+                        cantidad--;                            
+                        other.banderaorig = 0;
+                    }
+                }
+            }                        
+            patrullar = false;
+            movin = true;            
+            origx = x;
+            origy = y;
+            destx = other.xx;
+            desty = other.yy;                
+            banderadest = other.banderadestino;
+            banderaorig = other.banderasalida;
+            objetivo = 0;                              
+            instance_create(other.xx,other.yy,obj_stop);            
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                case 4:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy - (32);
+                break;
+                case 2:
+                case 3:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy + (32);
+                break;
+                
+            }            
+            other.contador++;
+            other.actual++; 
+            if(global.patrullar)
+            {
+                patrullar = true;                     
+            } 
+        }
         if(other.contador == other.columnas && other.cantidad >3 && other.cantidadTypo > other.actual)  // cuando coinciden saltamos a la siguiente fila
         {                
             other.fila = other.fila +1;
@@ -260,57 +332,7 @@ if(cantidadTypo > 0)
                 break;
             }
             other.contador = 0;                        
-        }            
-        if(selected)//añadimos el movimiento a la unidad.
-        {    
-            if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
-            {                
-                with(obj_bandera_patrulla)
-                {
-                    if(id == other.banderadest)
-                    {
-                        cantidad--;                            
-                        other.banderadest = 0;
-                    }
-                    if(id == other.banderaorig)
-                    {
-                        cantidad--;                            
-                        other.banderaorig = 0;
-                    }
-                }
-            }            
-            patrullar = false;
-            movin = true;            
-            origx = x;
-            origy = y;
-            destx = other.xx;
-            desty = other.yy;                
-            banderadest = other.banderadestino;
-            banderaorig = other.banderasalida;
-            objetivo = 0;                              
-            instance_create(other.xx,other.yy,obj_stop);            
-            switch(other.direccionMovimiento)
-            {            
-                case 1:
-                case 4:
-                    other.xx = other.xx + (64);            
-                    other.yy = other.yy - (32);
-                break;
-                case 2:
-                case 3:
-                    other.xx = other.xx + (64);            
-                    other.yy = other.yy + (32);
-                break;
-                
-            }
-            
-            other.contador++;
-            other.actual++; 
-            if(global.patrullar)
-            {
-                patrullar = true;                     
-            } 
-        }            
+        }              
     }        
     primeraUnidad = false;    
     minx = 9999;
