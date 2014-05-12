@@ -171,6 +171,7 @@
         <object>objects\obj_interface_cityhall</object>
       </objects>
     </objects>
+    <object>objects\obj_explota</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_change</room>
