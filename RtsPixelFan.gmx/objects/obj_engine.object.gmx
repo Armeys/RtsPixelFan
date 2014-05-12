@@ -41,6 +41,7 @@ sl_sunshadows_alphalimit  = 0.6; // Taux de luminosité ambiante minimum pour le
 sl_sunshadows_margin      = 200;  // Taille de la marge entourant la surface d'ombre, en pixels
 
 sl_sunshadows_layerscale[0] = 0.05;
+sl_sunshadows_layerscale[1] = 0.5;
 
 sl_ambientshadows_active = false//global.sombrasAmbiente; // Active le rendu des ombres ambiantes 
 sl_timespeed = (1/480); // velocidad a la que pasa el tiempo
@@ -49,7 +50,7 @@ sl_timespeed = (1/480); // velocidad a la que pasa el tiempo
 SL_sprite_set_ambient(spr_prueba);
 SL_sprite_set_ambient(spr_char_prueba);
 SL_sprite_set_ambient(spr_char_arquero);
-//SL_sprite_set_ambient(spr_bullet);
+SL_sprite_set_ambient(spr_prueba_iso);
 //SL_sprite_set_ambient(spr_bullet_up);
 //SL_sprite_set_ambient(spr_explosion);
 //SL_sprite_set_ambient(spr_explosion_tanke);
@@ -58,10 +59,10 @@ SL_sprite_set_ambient(spr_char_arquero);
  
 // Liste des objets projetant une ombre globale 
 
-SL_global_cast_obj(0,obj_prueba_luz,-1,1,1);
+SL_global_cast_obj(1,obj_prueba_luz,-1,1,1);
 SL_global_cast_obj(0,obj_char_prueba,-1,1,1);
 SL_global_cast_obj(0,obj_char_prueba_2,-1,1,1);  
-//SL_global_cast_obj(0,obj_caja,-1,1,1);
+SL_global_cast_obj(1,obj_prueba_isometrico,-1,1,1);
  
 // Liste des objets lumière 
 //SL_add_light(obj_light_torch);

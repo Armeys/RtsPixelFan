@@ -27,17 +27,18 @@
             <kind>1</kind>
             <string>window_set_fullscreen(global.full);
 switch (global.resolucion)
-{
-    case 1:
-        window_set_size(852,480);
-    break;
-    
+{  
     case 2:
         window_set_size(1024,576);
     break;
     
     case 3:
         window_set_size(1280,720);
+        room_set_view(rm_prueba2,0,1,0,0, 1280,720, 0,0, 1280,720, 1280, 720, 0, 0, -1);
+        room_set_view(rm_prueba2,1,1,0,0, 3200,1600, 5,720-125-5, round(400*0.6666),round(200*0.6666), 300, 150, 0, 0, -1);
+        global.interface = 1;
+        global.radarY = 125;
+        global.interfaceScale = 0.6666;     
     break;
     
     case 4:
@@ -46,11 +47,11 @@ switch (global.resolucion)
     
     case 5:
         window_set_size(1920,1080);
+        global.interface = 0;
+        global.radarY = 200;
+        global.interfaceScale = 1;  
     break;
-}
-    
-
-
+}  
 </string>
           </argument>
         </arguments>

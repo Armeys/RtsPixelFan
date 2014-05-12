@@ -3,16 +3,17 @@
 
 unidad = argument0;
 cantidadTypo = 0;
-with(obj_infanteria)  
+with(unidad)  
 {        
     if(selected)
     {
-        if(other.unidad.type == type)  //// cuanta las unidades de este tipo.     
-            other.cantidadTypo++;          
+        if(other.type == type)  //// cuanta las unidades de este tipo.     
+        {    
+            other.cantidadTypo++;
+        }          
         
         if(other.primeraUnidad == true)  ///contamos la cantidad de unidades que se van a mover y las posiciones minimas y maximas de la x y la y
-        {
-            other.cantidad++;            
+        {                       
             other.minx = min(other.minx,x);
             other.miny = min(other.miny,y);
             other.maxx = max(other.maxx,x);
@@ -26,7 +27,7 @@ with(obj_infanteria)
 if(cantidadTypo > 0)  
 {   
     /// calculo del numero de filas
-    filas = round(sqrt(cantidad));
+    filas = round(sqrt(cantidad));    
 
     /// calculo del numero de columnas de la unidad    
     if (cantidad >0 && cantidad <=9)    
@@ -48,54 +49,175 @@ if(cantidadTypo > 0)
     else if(cantidad >100 && cantidad <=121)
         columnas = 11; 
          
+    if(primeraUnidad == true)
+    {
+        if(minx + ((maxx - minx)/2) > mouse_x)
+            if(miny + ((maxy - miny)/2) > mouse_y )
+                direccionMovimiento = 1;
+            else
+                direccionMovimiento = 3;
+        else
+            if(miny + ((maxy - miny)/2) > mouse_y )
+                direccionMovimiento = 2;
+            else
+                direccionMovimiento = 4;
+    }
+    
     if(cantidadTypo > 3) // formacion para mas de 3 unidades. en cuadrado
     {
-        // calculamos x de la unidad de la esquina superior izq en relacion con el raton.       
-        if(columnas % 2 == 0)/// si es par ay que restarle media unidad para que se centre con el raton.
-            xxStart = mouse_x - ((unidad.ancho)*(floor(columnas/2)-0.5));
-        else
-            xxStart = mouse_x - ((unidad.ancho)*(floor(columnas/2)));
-        xx = xxStart;    //posicion de la primera columna
-        // calculamos y de la unidad de la esquina superior izq en relacion con el raton.        
-        /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
         if(primeraUnidad == true)
-        {            
-            if(filas % 2 == 0)
-                yy = mouse_y - (unidad.alto * (floor(filas/2)-0.5));
-            else
-                yy = mouse_y - (unidad.alto * (floor(filas/2)));
+        { 
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                    xxStart = mouse_x - (64 *((columnas-1)));
+                    xx = xxStart;
+                    yyStart = mouse_y;                    
+                    yy = yyStart;
+                break;
+                case 2:
+                    xxStart = mouse_x;
+                    xx = xxStart;
+                    yyStart = mouse_y -(32 *((columnas-1)));                    
+                    yy = yyStart;              
+                break;
+                case 3:
+                    xxStart = mouse_x - (64 *((columnas-1)));
+                    xx = xxStart;
+                    yyStart = mouse_y;                    
+                    yy = yyStart;                
+                break;
+                case 4:
+                    xxStart = mouse_x;
+                    xx = xxStart;
+                    yyStart = mouse_y +(32 *((columnas-1)));                    
+                    yy = yyStart;                    
+                break;
+            }
         }
         else
-        {
-            yy = yy + unidad.alto + 10;
+        {   
+            if(fila < ceil(cantidadAnterior/columnas))
+            {    
+                filaActual = filaActual +1;
+                switch(other.direccionMovimiento)
+                {            
+                    case 1:
+                        yy = yyStart + (32 * filaActual);
+                    break;
+                    case 2:
+                        yy = yyStart + (32 * filaActual);                        
+                    break;
+                    case 3:
+                        yy = yyStart - (32 * filaActual);
+                    break;
+                    case 4:
+                        yy = yyStart - (32 * filaActual);
+                    break;
+                }
+                fila = 0;                               
+            }
+            else
+            {
+                fila = 0;
+            }
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                    xx = xxStart + (64 * filaActual);                    
+                break;
+                case 2:
+                    xx = xxStart - (64 * filaActual);                    
+                break;
+                case 3:
+                    xx = xxStart + (64 * filaActual);
+                break;
+                case 4:
+                    xx = xxStart - (64 * filaActual);
+                break;
+            }
         }
     }
     else  // formacion para 3 o menso unidades.
     {
-        switch(cantidadTypo)
-        {
-            case 1:
-                xx = mouse_x;
-            break;
-            case 2:
-                xx = mouse_x - (unidad.ancho/2);
-            break;
-            case 3:
-                xx = mouse_x - unidad.ancho;
-            break;
-        }
-        /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
         if(primeraUnidad == true)
         {
-            yy = mouse_y;            
+            switch(cantidadTypo)
+            {
+                case 1:
+                    xx = mouse_x;
+                    yy = mouse_y;                
+                break;
+                case 2:
+                    xx = mouse_x - 32;
+                    yy = mouse_y;
+                break;
+                case 3:
+                    xx = mouse_x - 64;
+                    switch(other.direccionMovimiento)
+                    {
+                        case 1:
+                        case 4:
+                            yy = mouse_y + 32;
+                        break;
+                        case 2:
+                        case 3:
+                            yy = mouse_y - 32;
+                        break;
+                    }
+                break;
+            }
+            /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
+            xxStart = xx;
+            yyStart = yy;            
         }
         else
         {
-            yy = yy + unidad.alto + 10;
+            if(fila < ceil(cantidadAnterior/columnas))
+            {     
+                filaActual = filaActual + 1;
+                switch(other.direccionMovimiento)
+                {            
+                    case 1:
+                        yy = yyStart + (32 * filaActual);
+                    break;
+                    case 2:
+                        yy = yyStart + (32 * filaActual);                        
+                    break;
+                    case 3:
+                        yy = yyStart - (32 * filaActual);
+                    break;
+                    case 4:
+                        yy = yyStart - (32 * filaActual);
+                    break;
+                }
+                fila = 0;                
+            }
+            else
+            {
+                fila = 0;
+            }
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                    xx = xxStart + (64 * filaActual);                    
+                break;
+                case 2:
+                    xx = xxStart - (64 * filaActual);                    
+                break;
+                case 3:
+                    xx = xxStart + (64 * filaActual);
+                break;
+                case 4:
+                    xx = xxStart - (64 * filaActual);
+                break;
+            }
         }     
     }        
-                   
-    contador = 0; 
+                  
+    contador = 0;     
+    cantidadAnterior = cantidadTypo;
+        
     if(global.patrullar) // calculamos donde vamos a colocar las banderas. la de inicio en el centro de la pisicion inicial de las unidades
     {                    // la de destino en la posicion del raton. les asignamos la cantidad de unidades q van a hacer esa patrulla.
         banderax = minx + ((maxx - minx)/2);
@@ -106,22 +228,35 @@ if(cantidadTypo > 0)
             banderasalida.cantidad = cantidad;        
             banderadestino = instance_create(mouse_x,mouse_y,obj_bandera_patrulla);
             banderadestino.image_index = 1;
-            banderadestino.cantidad = cantidad;
+            banderadestino.cantidad = cantidad;            
         }            
     }
-    
+    actual = 0;
     with(unidad)
-    {     
-        if(other.contador == other.columnas && other.cantidad >3)  // cuando coinciden saltamos a la siguiente fila
-        {                
-            other.yy = other.yy + alto ;
-            other.xx = other.xxStart;
-            other.contador = 0;            
-        }            
-        if(selected)//añadimos el movimiento a la unidad.
-        {                
-            if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
+    {    
+        while(tile_layer_find(1000,other.xx,other.yy) == -1)
+        {
+            if(room_width/2 < other.xx)
             {
+                other.xx = other.xx - 64;
+            }
+            else            
+            {
+                other.xx = other.xx + 64;
+            }
+            if(room_height/2 < other.yy)
+            {
+                other.yy = other.yy -32;
+            }
+            else
+            {
+                other.yy = other.yy +32
+            }                    
+        }                  
+        if(selected)//añadimos el movimiento a la unidad.
+        {    
+            if(banderadest != 0) //al volver a mover la unidad la restamos de su banderar para poder eliminar las banderas cuando no hay patrullas.
+            {                
                 with(obj_bandera_patrulla)
                 {
                     if(id == other.banderadest)
@@ -135,25 +270,64 @@ if(cantidadTypo > 0)
                         other.banderaorig = 0;
                     }
                 }
-            }
-            
+            }                        
             patrullar = false;
-            movin = true;
+            movin = true;            
             origx = x;
             origy = y;
             destx = other.xx;
             desty = other.yy;                
             banderadest = other.banderadestino;
-            banderaorig = other.banderasalida;                              
-            instance_create(other.xx,other.yy,obj_stop);
-            other.xx = other.xx + ancho;
-            other.contador++; 
+            banderaorig = other.banderasalida;
+            objetivo = 0;                              
+            instance_create(other.xx,other.yy,obj_stop);            
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                case 4:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy - (32);
+                break;
+                case 2:
+                case 3:
+                    other.xx = other.xx + (64);            
+                    other.yy = other.yy + (32);
+                break;
+                
+            }            
+            other.contador++;
+            other.actual++; 
             if(global.patrullar)
             {
                 patrullar = true;                     
             } 
-        }            
-    }    
+        }
+        if(other.contador == other.columnas && other.cantidad >3 && other.cantidadTypo > other.actual)  // cuando coinciden saltamos a la siguiente fila
+        {                
+            other.fila = other.fila +1;
+            other.filaActual = other.filaActual +1;
+            switch(other.direccionMovimiento)
+            {            
+                case 1:
+                    other.yy = other.yyStart + 32 * other.filaActual;
+                    other.xx = other.xxStart + 64 * other.filaActual;
+                break;
+                case 2:
+                    other.yy = other.yyStart + 32 * other.filaActual;
+                    other.xx = other.xxStart - 64 * other.filaActual;
+                break;
+                case 3:
+                    other.yy = other.yyStart - 32 * other.filaActual;
+                    other.xx = other.xxStart + 64 * other.filaActual;
+                break;
+                case 4:
+                    other.yy = other.yyStart - 32 * other.filaActual;
+                    other.xx = other.xxStart - 64 * other.filaActual;
+                break;
+            }
+            other.contador = 0;                        
+        }              
+    }        
     primeraUnidad = false;    
     minx = 9999;
     maxx = 0;

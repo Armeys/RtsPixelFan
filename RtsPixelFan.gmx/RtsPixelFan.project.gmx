@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="6" name="datafiles">
-    <datafiles number="6" name="config">
+  <datafiles number="9" name="datafiles">
+    <datafiles number="9" name="config">
       <datafile>
         <name>config.ini</name>
         <exists>-1</exists>
@@ -23,6 +23,27 @@
         <filename>config.ini</filename>
       </datafile>
     </datafiles>
+    <datafiles number="9" name="resourses">
+      <datafiles number="9" name="logo">
+        <datafile>
+          <name>logo.gif</name>
+          <exists>-1</exists>
+          <size>136432</size>
+          <exportAction>2</exportAction>
+          <exportDir></exportDir>
+          <overwrite>0</overwrite>
+          <freeData>-1</freeData>
+          <removeEnd>0</removeEnd>
+          <store>0</store>
+          <ConfigOptions>
+            <Config name="Default">
+              <CopyToMask>9223372036854775807</CopyToMask>
+            </Config>
+          </ConfigOptions>
+          <filename></filename>
+        </datafile>
+      </datafiles>
+    </datafiles>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -35,9 +56,21 @@
     <sprites name="character prueba">
       <sprite>sprites\spr_char_prueba</sprite>
       <sprite>sprites\spr_bloqueo</sprite>
+      <sprite>sprites\spr_bloqueo_abajo</sprite>
       <sprite>sprites\spr_stop</sprite>
       <sprite>sprites\spr_bandera_patrulla</sprite>
       <sprite>sprites\spr_char_arquero</sprite>
+      <sprite>sprites\spr_enemigo</sprite>
+      <sprite>sprites\spr_prueba_iso</sprite>
+      <sprite>sprites\spr_flecha</sprite>
+      <sprite>sprites\spr_mainTank</sprite>
+      <sprite>sprites\spr_bloqueo_izq</sprite>
+      <sprite>sprites\spr_bloqueo_der</sprite>
+      <sprite>sprites\spr_minimap_unidad</sprite>
+      <sprite>sprites\spr_minimap_edificio</sprite>
+      <sprite>sprites\spr_interface</sprite>
+      <sprite>sprites\spr_edificio_cityhall</sprite>
+      <sprite>sprites\spr_char_aldeano</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -52,8 +85,7 @@
     </sprites>
   </sprites>
   <backgrounds name="background">
-    <background>background\bgm_title</background>
-    <background>background\bg_prueba</background>
+    <background>background\part4_tileset</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -79,35 +111,51 @@
     <scripts name="formacion">
       <script>scripts\scr_formacion_cuadrado.gml</script>
     </scripts>
+    <scripts name="unidades">
+      <script>scripts\scr_unidad_infanteria.gml</script>
+      <script>scripts\scr_unidad_vehiculo.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_prueba</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_iniciar_game</object>
-    <objects name="luces">
-      <object>objects\obj_engine</object>
-      <object>objects\obj_change</object>
-      <object>objects\obj_prueba_luz</object>
-      <object>objects\obj_niebla</object>
-    </objects>
     <objects name="objetos parent">
       <object>objects\obj_infanteria</object>
       <object>objects\obj_vehiculos</object>
       <object>objects\obj_aereos</object>
+      <object>objects\obj_enemigo_infanteria</object>
+      <object>objects\obj_aliado</object>
       <object>objects\obj_enemigo</object>
+      <object>objects\obj_interface_edificio</object>
     </objects>
     <objects name="prueba a*">
       <object>objects\obj_char_prueba</object>
+      <object>objects\obj_char_aldeano</object>
+      <object>objects\obj_vehiculo_prueba</object>
       <object>objects\obj_char_prueba_2</object>
       <object>objects\obj_noentra</object>
+      <object>objects\obj_noentra_abajo</object>
+      <object>objects\obj_noentra_der</object>
+      <object>objects\obj_noentra_izq</object>
       <object>objects\obj_stop</object>
       <object>objects\obj_bandera_patrulla</object>
+      <object>objects\obj_unit_enemigo</object>
+      <object>objects\obj_prueba_isometrico</object>
+      <object>objects\obj_flecha</object>
     </objects>
-    <objects name="teclado y raton">
+    <objects name="objetos globales">
+      <objects name="luces">
+        <object>objects\obj_engine</object>
+        <object>objects\obj_change</object>
+        <object>objects\obj_prueba_luz</object>
+        <object>objects\obj_niebla</object>
+      </objects>
       <object>objects\obj_raton</object>
       <object>objects\obj_control_camara</object>
       <object>objects\obj_teclado</object>
+      <object>objects\obj_iniciar_game</object>
+      <object>objects\obj_interface</object>
     </objects>
     <objects name="prueba recursos">
       <object>objects\obj_casa</object>
@@ -118,11 +166,18 @@
     <objects name="logo">
       <object>objects\obj_logo</object>
     </objects>
+    <objects name="edificios">
+      <objects name="interfaceicons">
+        <object>objects\obj_interface_cityhall</object>
+      </objects>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_change</room>
     <room>rooms\rm_inicio</room>
+    <room>rooms\rm_prueba2</room>
     <room>rooms\rm_prueba</room>
+    <room>rooms\prueba_2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

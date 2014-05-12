@@ -25,10 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ancho=26;
-alto=46;
+            <string>event_inherited();
 type = "Soldado";
-velMovi = 2;
+scr_unidad_infanteria(type);
 image_speed = 0;
 selected = false;
 movin = false;
@@ -65,51 +64,7 @@ crearbandera = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///////////patrullar//////
-if(patrullar)
-{    
-    if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
-    {        
-        movin = true;        
-    }
-    if(volver)
-    {
-        mp_potential_step(origx,origy,velMovi,false);        
-        if(origx == x &amp;&amp; origy == y)
-        {
-            volver = false;
-        }
-    }
-    if(movin == true)
-    {    
-        mp_potential_step(destx,desty,velMovi,false);        
-        if (distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty))
-        {
-            movin = false;
-            volver = true;        
-        }
-        if(destx == x &amp;&amp; desty == y)
-        {
-            movin = false;
-            if(patrullar)
-                volver = true;
-        }
-    }    
-}
-else
-{
-    ///////movimiento simple/////////
-    if(movin == true)
-    {       
-        mp_potential_step(destx,desty,velMovi,false);        
-        if ((distance_to_point(destx,desty) &lt; 25 &amp;&amp; !place_free(destx,desty)) || (destx == x &amp;&amp; desty == y))        
-        {
-            movin = false;
-            destx = 0;
-            desty = 0;
-        }        
-    }
-}
+            <string>event_inherited();
 </string>
           </argument>
         </arguments>
@@ -195,8 +150,13 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/////desseleccionamos los otros
+            <string>event_inherited();
+/////desseleccionamos los otros
 with (obj_infanteria) 
+{
+    selected = false;    
+}
+with (obj_vehiculos) 
 {
     selected = false;    
 }
@@ -224,12 +184,7 @@ selected = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index,0,x,y);
-if(selected)
-{
-    draw_set_color(c_dkgray);
-    draw_circle(x,y,18,true);
-}
+            <string>event_inherited();
 </string>
           </argument>
         </arguments>
