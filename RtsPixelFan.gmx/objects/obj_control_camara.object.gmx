@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>xMouse = 0;
+yMouse = 0;
 </string>
           </argument>
         </arguments>
@@ -48,8 +49,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xMouse = display_mouse_get_x() + view_xview[0];
-yMouse = display_mouse_get_y() + view_yview[0];
+            <string>xMouse = mouse_x;//display_mouse_get_x() + view_xview[0];
+yMouse = mouse_y;//display_mouse_get_y() + view_yview[0];
 
 if (xMouse &lt; (view_xview[0] + 5) &amp;&amp; xMouse &gt; 10)
 {
@@ -66,7 +67,7 @@ if (yMouse &lt; (view_yview[0] + 5) &amp;&amp; yMouse &gt; 15)
     view_yview[0] = view_yview[0] - 10;
 }
 
-if (yMouse &gt; (view_yview[0] + view_hview[0]-5) &amp;&amp; yMouse &lt; room_height -10)
+if (yMouse &gt; (view_yview[0] + view_hview[0]-5) &amp;&amp; yMouse &lt; room_height +global.radarY)
 {
     view_yview[0] = view_yview[0] + 10;
 }

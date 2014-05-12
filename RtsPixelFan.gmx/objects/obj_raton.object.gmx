@@ -158,6 +158,11 @@ if(tile_layer_find(1000,mouse_x,mouse_y) &gt; -1)
                 other.cantidad++;                         
             }
         }
+        if(instance_exists(obj_char_aldeano))
+        {
+            type = "Aldeano";
+            scr_formacion_cuadrado(obj_char_aldeano);
+        }
         
         if(instance_exists(obj_char_prueba))
         {
@@ -227,7 +232,12 @@ if(tile_layer_find(1000,mouse_x,mouse_y) &gt; -1)
 if(display_mouse_get_x() &lt; (view_wport[1] + view_xport[1]) &amp;&amp; display_mouse_get_x() &gt; view_xport[1] &amp;&amp; display_mouse_get_y() &gt; view_yport[1] &amp;&amp; display_mouse_get_y() &lt; (view_yport[1] + view_hport[1]))
 {    
     view_xview[0] = mouse_x - (view_wview[0]/2);
-    view_yview[0] = mouse_y - (view_hview[0]/2);    
+    view_yview[0] = mouse_y - (view_hview[0]/2);
+    if (view_xview[0] &lt; 0) view_xview = 0;
+    if (view_xview[0] &gt; room_width - view_wview[0]) view_xview[0] = room_width - view_wview[0];
+    if (view_yview[0] &lt; 0) view_yview = 0;
+    if (view_yview[0] &gt; room_height + 200 - view_hview[0]) view_yview[0] = (room_height + 200) - view_hview[0];
+     
 }
 else
 {
@@ -299,7 +309,8 @@ else
           <argument>
             <kind>1</kind>
             <string>draw_set_color(c_white);
-draw_text(mouse_x,mouse_y,string(mouse_x) + " " + string(mouse_y));
+draw_text(mouse_x,mouse_y,string(view_xview[0]) + " " + string(view_yview[0]));
+draw_text(mouse_x,mouse_y +10,string(obj_control_camara.xMouse)+" " + string(obj_control_camara.yMouse));
 if(pintar)
 {
     draw_set_color(c_green);

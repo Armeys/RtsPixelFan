@@ -2,6 +2,19 @@
 //argument0 es el tipo de unidad que vamos a crear
 switch(argument0)
 {
+    case "Aldeano":
+        ancho=16;
+        alto=16;
+        velMovi = 2;
+        vision = 1;
+        alcance = 15;
+        vida = 80;
+        vidaTotal = 80;
+        damage = 1;
+        vel_ataque = 200;
+        vel_vuelo = 0;
+        sprite_index = spr_char_aldeano;
+    break;
     case "Soldado":
         ancho=26;
         alto=46;

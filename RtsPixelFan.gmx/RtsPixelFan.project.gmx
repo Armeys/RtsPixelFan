@@ -68,6 +68,9 @@
       <sprite>sprites\spr_bloqueo_der</sprite>
       <sprite>sprites\spr_minimap_unidad</sprite>
       <sprite>sprites\spr_minimap_edificio</sprite>
+      <sprite>sprites\spr_interface</sprite>
+      <sprite>sprites\spr_edificio_cityhall</sprite>
+      <sprite>sprites\spr_char_aldeano</sprite>
     </sprites>
     <sprites name="prueba_minions">
       <sprite>sprites\spr_minions</sprite>
@@ -124,9 +127,11 @@
       <object>objects\obj_enemigo_infanteria</object>
       <object>objects\obj_aliado</object>
       <object>objects\obj_enemigo</object>
+      <object>objects\obj_interface_edificio</object>
     </objects>
     <objects name="prueba a*">
       <object>objects\obj_char_prueba</object>
+      <object>objects\obj_char_aldeano</object>
       <object>objects\obj_vehiculo_prueba</object>
       <object>objects\obj_char_prueba_2</object>
       <object>objects\obj_noentra</object>
@@ -149,8 +154,8 @@
       <object>objects\obj_raton</object>
       <object>objects\obj_control_camara</object>
       <object>objects\obj_teclado</object>
-      <object>objects\obj_minimapa</object>
       <object>objects\obj_iniciar_game</object>
+      <object>objects\obj_interface</object>
     </objects>
     <objects name="prueba recursos">
       <object>objects\obj_casa</object>
@@ -160,6 +165,11 @@
     </objects>
     <objects name="logo">
       <object>objects\obj_logo</object>
+    </objects>
+    <objects name="edificios">
+      <objects name="interfaceicons">
+        <object>objects\obj_interface_cityhall</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">

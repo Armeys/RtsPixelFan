@@ -150,7 +150,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/////desseleccionamos los otros
+            <string>event_inherited();
+/////desseleccionamos los otros
 with (obj_infanteria) 
 {
     selected = false;    

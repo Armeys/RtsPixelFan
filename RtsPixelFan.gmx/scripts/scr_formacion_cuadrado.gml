@@ -165,12 +165,10 @@ if(cantidadTypo > 0)
                             yy = mouse_y - 32;
                         break;
                     }
-                    
-                    xxStart = xx;
                 break;
             }
             /// si es el sugundo tipo de unidad solo tenemos que desplazarlas un poco hacia abajo
-            
+            xxStart = xx;
             yyStart = yy;            
         }
         else
@@ -238,26 +236,22 @@ if(cantidadTypo > 0)
     {    
         while(tile_layer_find(1000,other.xx,other.yy) == -1)
         {
-            switch(other.direccionMovimiento)
-            {            
-                case 1:
-                    other.xx = other.xx + (64);            
-                    other.yy = other.yy + (32);
-                break;
-                case 4:
-                    other.xx = other.xx - (64);            
-                    other.yy = other.yy - (32);
-                break;
-                case 2:
-                    other.xx = other.xx - (64);            
-                    other.yy = other.yy + (32);
-                break;
-                case 3:
-                    other.xx = other.xx + (64);            
-                    other.yy = other.yy - (32);
-                break;
-                
-            }                     
+            if(room_width/2 < other.xx)
+            {
+                other.xx = other.xx - 64;
+            }
+            else            
+            {
+                other.xx = other.xx + 64;
+            }
+            if(room_height/2 < other.yy)
+            {
+                other.yy = other.yy -32;
+            }
+            else
+            {
+                other.yy = other.yy +32
+            }                    
         }                  
         if(selected)//añadimos el movimiento a la unidad.
         {    

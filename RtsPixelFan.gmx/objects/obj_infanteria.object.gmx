@@ -37,6 +37,9 @@ alcance = 100;
 selected = false;
 estado = "defensa";
 objetivo = 0;
+pintarUi = false;
+uiCreated = false;
+borrarUi = false;
 </string>
           </argument>
         </arguments>
@@ -82,7 +85,18 @@ objetivo = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///////////patrullar//////
+            <string>///////////reset pintar ui
+if(uiCreated &amp;&amp; !selected)
+{
+    pintarUi = false;
+    uiCreated = false;
+    for(i=0;i&lt;array_length_1d(uiIcons);i++)
+    {
+        with (uiIcons[i]) instance_destroy();
+    }
+    borrarUi = false;
+}
+///////////patrullar//////
 if(patrullar)
 {    
     if(origx == x &amp;&amp; origy == y &amp;&amp; (destx != 0 || desty !=0))
@@ -179,6 +193,65 @@ if(distance_to_object(obj_unit_enemigo) &lt; (vision * 230))
                 }
             }
         break;        
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(type == "Aldeano")
+{
+    pintarUi = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(pintarUi)
+{
+    xx = round(1700*global.interfaceScale);
+    yy = round(930*global.interfaceScale);
+    draw_sprite(sprite_index,0,500,950);
+    if(!uiCreated)
+    {
+        uiIcons[0] = instance_create(xx,yy,obj_interface_cityhall);
+        uiCreated = true;
     }
 }
 </string>
